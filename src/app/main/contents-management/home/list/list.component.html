@@ -1,0 +1,504 @@
+<div class="content-wrapper">
+  <div class="card animated fadeIn p-3">
+    <tabset #staticTabs>
+      <tab heading="Section 1" class="tabsHeading">
+        <form #homeForm="ngForm" (ngSubmit)="submitHomeForm(homeForm, charity)" autocomplete="off">
+          <div class="card-body">
+            <div class="row  form-group">
+              <div class="row mx-auto mb-20">
+                <img *ngIf="!images.length" class="user-profile-img" src="assets/images/noImageAvailable.png"
+                  alt="no img">
+                <div class="user-profile-img" *ngFor='let image of images; let y=index;'>
+                  <i *ngIf="images.length>1" (click)="deleteImage(y)" class="fa fa-times" aria-hidden="true"></i>
+                  <img [src]="image ?this.imagePath+image :'assets/images/noImageAvailable.png'" alt="no img">
+                </div>
+                <div>
+                  <label>
+                    <input class='file-input' style="display: none" type="file" name="photo" accept="image/*" multiple
+                      (change)="fileChangeEvent($event)" id="profile">
+                  </label>
+                </div>
+                <a href="javascript:;" (click)="openFile($event,'images')"><em class="fa fa-camera camera"
+                    aria-hidden="true"></em></a>
+              </div>
+            </div>
+            <!-- Title starts -->
+            <div class="row form-group">
+              <div class="col-md-3">
+                <label class="col-form-label">Title :</label>
+              </div>
+              <div class="col-md-8" [ngClass]="((submitted || title.touched) && title.invalid)?'has-danger':''">
+                <input type="text" class="form-control" name="title" placeholder="Enter  Title" #title="ngModel"
+                  [(ngModel)]="charity.title" required>
+                <div class="error-block text-left" *ngIf="((submitted || title.touched) && title.invalid)">
+                  {{showError('title', title.errors)}}
+                </div>
+              </div>
+            </div>
+            <!-- Title Ends -->
+
+            <!-- subTitle Starts -->
+            <div class="row form-group">
+              <div class="col-md-3">
+                <label class="col-form-label">Sub Title :</label>
+              </div>
+              <div class="col-md-8">
+                <input type="text" class="form-control" name="subTitle" placeholder="Enter subTitle "
+                  #subTitle="ngModel" [(ngModel)]="charity.subTitle">
+
+              </div>
+            </div>
+            <!-- subTitle Ends -->
+
+            <!-- Title Description Starts -->
+            <div class="row form-group">
+              <div class="col-md-3">
+                <label class="col-form-label">Title Description :</label>
+              </div>
+              <div class="col-md-8">
+                <input type="text" class="form-control" name="titleDescription" placeholder="Enter Title Description "
+                  [(ngModel)]="charity.titleDescription" required>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-footer form-group">
+            <div class="button-group-container float-right">
+              <button type="button" class="btn btn-outline-primary" (click)="selectTab(0,charity)">Cancel</button>
+            </div>
+            <div class="button-group-container float-right">
+              <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+          </div>
+        </form>
+        <!-- Title Description Ends -->
+      </tab>
+
+      <!--Tab11 ENDS     HEREEE-->
+
+
+
+
+
+      <tab heading="Section 2">
+        <form #section2Form="ngForm" (ngSubmit)="submitSection2Form(section2Form, charity)">
+          <!-- stepsToRegTitle -->
+          <div class="card-body">
+            <div class="row form-group">
+              <div class="col-md-3">
+                <label class="col-form-label">Steps-To-RegTitle :</label>
+              </div>
+              <div class="col-md-8">
+                <input type="text" class="form-control" name="stepsToRegTitle" placeholder="Enter steps To RegTitle"
+                  [(ngModel)]="charity.stepsToRegTitle">
+
+              </div>
+            </div>
+            <!-- stepsToRegDescription -->
+            <div class="row form-group">
+              <div class="col-md-3">
+                <label class="col-form-label">Steps-To-RegDescription :</label>
+              </div>
+              <div class="col-md-8">
+                <input type="text" class="form-control" name="stepsToRegDescription" placeholder="Enter RegDescription"
+                  [(ngModel)]="charity.stepsToRegDescription">
+
+              </div>
+            </div>
+            <!-- donationWayOne -->
+
+            <div class="row form-group">
+              <div class="col-md-3">
+                <label class="col-form-label">Charities Title :</label>
+              </div>
+              <div class="col-md-8">
+                <input type="text" class="form-control" name="charitiesTitle" placeholder="Enter Charity Title"
+                  [(ngModel)]="charity.charitiesTitle">
+
+              </div>
+            </div>
+            <div class="row form-group">
+              <div class="col-md-3">
+                <label class="col-form-label">Causes Title :</label>
+              </div>
+              <div class="col-md-8">
+                <input type="text" class="form-control" name="causesTitle" placeholder="Enter Causes Title"
+                  [(ngModel)]="charity.causesTitle">
+
+              </div>
+            </div>
+            <hr />
+            <!-- <div class="card-body"> -->
+            <div *ngFor="let i of listArray; index as index">
+              <div class="row justify-content-center  form-group">
+                <div class="form-group">
+                  <div class="user-profile-img">
+                    <div class="inner-image" id="section2">
+                      <img [src]=" i.icon ?this.imagePath+i.icon :'assets/images/noImageAvailable.png'" alt="no img">
+                    </div>
+                    <div class="upload-file">
+                      <label>
+                        <input class='file-input' type="file" name="profile+{{index}}" accept="image/png/svg" multiple
+                          (change)="fileChangeEvent($event,index,'icon')" id="icon">
+                      </label>
+                      <a href="javascript:;" (click)="openFile($event,'icon',index)"><em class="fa fa-camera camera"
+                          aria-hidden="true"></em></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-md-3">
+                  <label class="col-form-label">Title :</label>
+                </div>
+                <div class="col-md-8">
+                  <input type="text" class="form-control" name="title{{index}}" placeholder="Enter  Title"
+                    #donationTitle="ngModel" [(ngModel)]="i.title">
+
+                </div>
+              </div>
+
+              <!-- numberOfDonations -->
+              <div class="row form-group">
+                <div class="col-md-3">
+                  <label class="col-form-label">description :</label>
+                </div>
+                <div class="col-md-8">
+                  <input type="text" class="form-control" name="description{{index}}"
+                    placeholder="Enter number Of Donations" #description="ngModel" [(ngModel)]="i.description">
+
+                </div>
+              </div>
+
+            </div>
+            <button type="button" class="btn btn-primary" [hidden]="listArray.length>=3" (click)="addForms()">Add
+              Forms</button>
+          </div>
+          <button type="button" class="btn btn-primary" [hidden]="listArray.length>=3" (click)="addForms()">Add
+            Forms</button>
+          <div class="card-footer form-group">
+            <div class="button-group-container float-right">
+              <button type="button" class="btn btn-outline-primary" (click)="selectTab(1,charity)">Cancel</button>
+            </div>
+            <div class="button-group-container float-right">
+              <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+          </div>
+        </form>
+      </tab>
+
+
+
+      <!--TAB2 ENDS HEREEEE-->
+      <tab heading="Section 3">
+        <div class="content-wrapper">
+          <!-- smtp Form Starts -->
+          <form #section3Form="ngForm" (ngSubmit)="submiSection3Form(section3Form, charity)">
+            <div class="card-body">
+
+              <!-- Benefits Of Reg Starts -->
+              <div class="form-group row">
+                <div class="col-lg-2 col-sm-3">
+                  <label class="col-form-label">Benefits Of Registration:</label>
+                </div>
+                <div class="col-xl-10 co-lg-12">
+                  <input type="text" class="form-control" placeholder="Enter Benefits Of Registration" name="host"
+                    [(ngModel)]="charity.benefitsOfReg">
+
+                </div>
+              </div>
+              <!-- Benefits Of Reg Ends -->
+
+              <!-- Benefits Of Reg Description starts grapejs -->
+              <div class="form-group row">
+                <div class="col-lg-2 col-sm-3">
+                  <label class="col-form-label">Benefits Of Reg Description:</label>
+                </div>
+                <div class="col-xl-10 co-lg-12">
+                  <div class="form-group">
+                    <!-- BEGIN: Grapesjs Editor -->
+                    <app-grapes-js [emailTemplate]="grapesJsData1" [type]="type" [grapesjsId]="gjs1"></app-grapes-js>
+                    <!-- END: Grapesjs Editor -->
+                  </div>
+                </div>
+              </div>
+              <!-- Benefits Of Reg Description Ends -->
+
+              <!--Question starts -->
+              <div class="form-group row">
+                <div class="col-lg-2 col-sm-3">
+                  <label class="col-form-label">Question:</label>
+                </div>
+                <div class="col-xl-10 co-lg-12">
+                  <input type="text" class="form-control" placeholder="Enter question" name="question"
+                    [(ngModel)]="charity.question">
+                </div>
+              </div>
+              <!-- Question Ends -->
+
+              <!-- Question Description starts grapejs-->
+              <div class="form-group row">
+                <div class="col-lg-2 col-sm-3">
+                  <label class="col-form-label">Question Description:</label>
+                </div>
+                <div class="col-xl-10 co-lg-10">
+                  <app-grapes-js [emailTemplate]="grapesJsData2" [type]="type2" [grapesjsId]="gjs2"></app-grapes-js>
+                </div>
+              </div>
+              <!-- Question Description  Ends -->
+
+            </div>
+            <div class="card-footer form-group">
+              <div class="button-group-container float-right">
+                <button type="button" class="btn btn-outline-primary"
+                  (click)="selectTab(2,charity,'cancel')">Cancel</button>
+              </div>
+              <div class="button-group-container float-right">
+                <button type="submit" class="btn btn-primary">Save</button>
+              </div>
+            </div>
+
+          </form>
+        </div>
+
+      </tab>
+      <tab heading="Section 4">
+        <div class="content-wrapper">
+          <!-- <div> -->
+          <!-- smtp Form Starts -->
+          <form #section4Form="ngForm" (ngSubmit)="submitSection4Form(section4Form, charity)">
+            <div class="card-body">
+
+              <!-- Title Starts -->
+              <div class="form-group row">
+                <div class="col-lg-2 col-sm-3">
+                  <label class="col-form-label">How Donate:</label>
+                </div>
+                <div class="col-xl-10 co-lg-10">
+                  <input type="text" class="form-control" placeholder="Enter How to Donate" name="host"
+                    [(ngModel)]="charity.howDonate">
+
+                </div>
+              </div>
+              <!-- Title Ends -->
+
+              <!-- Descriptoion starts-->
+              <div class="form-group row">
+                <div class="col-lg-2 col-sm-3">
+                  <label class="col-form-label">How Donate Description:</label>
+                </div>
+                <div class="col-xl-10 co-lg-10">
+                  <textarea type="text" class="form-control" placeholder="Enter How Donate Description" name="host"
+                    [(ngModel)]="charity.howDonateDesc" rows="5" cols="5">
+                        </textarea>
+
+                </div>
+              </div>
+              <!--  Descriptoion ends -->
+
+              <!-- Title  One Starts -->
+              <div class="form-group row">
+                <div class="col-lg-2 col-sm-3">
+                  <label class="col-form-label">Donate Option One Title:</label>
+                </div>
+                <div class="col-xl-10 co-lg-10">
+                  <input type="text" class="form-control" placeholder="Enter Donate Option One Title" name="host"
+                    [(ngModel)]="charity.donateOptionOneTitle">
+
+                </div>
+              </div>
+              <!-- Title  One Ends -->
+
+              <!-- Title one  Description starts grapejs -->
+              <div class="form-group row">
+                <div class="col-lg-2 col-sm-3">
+                  <label class="col-form-label">Donate Option One Description:</label>
+                </div>
+                <div class="col-xl-10 co-lg-10">
+                  <div class="form-group">
+                    <!-- BEGIN: Grapesjs Editor -->
+                    <app-grapes-js [emailTemplate]="grapesJsData3" [type]="type3" [grapesjsId]="gjs3"></app-grapes-js>
+                  </div>
+                </div>
+              </div>
+              <!-- Title one  Description Ends -->
+
+              <!-- Donate Option Two Title starts -->
+              <div class="form-group row">
+                <div class="col-lg-2 col-sm-3">
+                  <label class="col-form-label">Donate Option Two Title:</label>
+                </div>
+                <div class="col-xl-10 co-lg-10">
+                  <input type="text" class="form-control" placeholder="Enter Donate Option Two Title"
+                    name="donateOptionTwoTitle" [(ngModel)]="charity.donateOptionTwoTitle">
+                </div>
+              </div>
+              <!-- Donate Option Two Title ends -->
+
+              <!-- Title two  Description starts grapejs-->
+              <div class="form-group row">
+                <div class="col-lg-2 col-sm-3">
+                  <label class="col-form-label">Donate Option Two Description:</label>
+                </div>
+                <div class="col-xl-10 co-lg-10">
+                  <app-grapes-js [emailTemplate]="grapesJsData4" [type]="type4" [grapesjsId]="gjs4"></app-grapes-js>
+                </div>
+              </div>
+              <!-- Title two Description  Ends -->
+
+
+              <!-- Donate Option Two Title starts -->
+              <div class="form-group row">
+                <div class="col-lg-2 col-sm-3">
+                  <label class="col-form-label">Donars Title:</label>
+                </div>
+                <div class="col-xl-10 co-lg-10">
+                  <input type="text" class="form-control" placeholder="Enter Donors Title" name="donarsTitle"
+                    [(ngModel)]="charity.donarsTitle">
+                </div>
+              </div>
+              <!-- Donate Option Two Title ends -->
+
+              <!-- Title two  Description starts grapejs-->
+              <div class="form-group row">
+                <div class="col-lg-2 col-sm-3">
+                  <label class="col-form-label">DonarsDescription:</label>
+                </div>
+                <div class="col-xl-10 co-lg-10">
+                  <app-grapes-js [emailTemplate]="grapesJsData5" [type]="type5" [grapesjsId]="gjs5"></app-grapes-js>
+                  <!-- <app-grapes-js [emailTemplate]="grapesJsData2" [type]="type" [grapesjsId]='gjs2'></app-grapes-js> -->
+                </div>
+              </div>
+              <!-- Title two Description  Ends -->
+              <div class="card-footer form-group">
+                <div class="button-group-container float-right">
+                  <button type="button" class="btn btn-outline-primary"
+                    (click)="selectTab(3,charity,'cancel')">Cancel</button>
+                </div>
+                <div class="button-group-container float-right">
+                  <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+              </div>
+
+            </div>
+
+          </form>
+          <!-- </div> -->
+        </div>
+
+
+      </tab>
+      <tab heading="Section 5">
+        <form #section5Form="ngForm" (ngSubmit)="submitSection5Form(section5Form, charity)">
+          <div class="card-body">
+            <div class="row form-group">
+              <div class="col-md-3">
+                <label class="col-form-label">No Of
+                  Charities :</label>
+              </div>
+              <div class="col-md-8"
+                [ngClass]="((submitted || numberOfcharities.touched) && numberOfcharities.invalid)?'has-danger':''">
+                <input type="text" class="form-control" name="numberOfcharities" (keydown)="AllowNumbers($event)"
+                  placeholder="Enter No Of Charities" #numberOfcharities="ngModel"
+                  [(ngModel)]="charity.numberOfcharities" required>
+                <div class="error-block text-left"
+                  *ngIf="((submitted || numberOfcharities.touched) && numberOfcharities.invalid)">
+                  {{showError('numberOfcharities', numberOfcharities.errors)}}
+                </div>
+              </div>
+            </div>
+            <!-- charitiesDescription -->
+            <div class="row form-group">
+              <div class="col-md-3"
+                [ngClass]="((submitted || charitiesDescription.touched) && charitiesDescription.invalid)?'has-danger':''">
+                <label class="col-form-label">Charities Description :</label>
+              </div>
+              <div class="col-md-8">
+                <textarea type="text" rows="5" cols="5" class="form-control" name="charitiesDescription"
+                  placeholder="Enter Charities Description" #charitiesDescription="ngModel"
+                  [(ngModel)]="charity.charitiesDescription" required></textarea>
+                <div class="error-block text-left"
+                  *ngIf="((submitted || charitiesDescription.touched) && charitiesDescription.invalid)">
+                  {{showError('charitiesDescription', charitiesDescription.errors)}}
+                </div>
+              </div>
+
+            </div>
+            <!-- numberOfVolunteers -->
+            <div class="row form-group">
+              <div class="col-md-3">
+                <label class="col-form-label">Number Of Volunteers :</label>
+              </div>
+              <div class="col-md-8"
+                [ngClass]="((submitted || numberOfVolunteers.touched) && numberOfVolunteers.invalid)?'has-danger':''">
+                <input type="text" class="form-control" name="numberOfVolunteers"
+                  placeholder="Enter Number Of Volunteers" (keydown)="AllowNumbers($event)"
+                  #numberOfVolunteers="ngModel" [(ngModel)]="charity.numberOfVolunteers" required>
+                <div class="error-block text-left"
+                  *ngIf="((submitted || numberOfVolunteers.touched) && numberOfVolunteers.invalid)">
+                  {{showError('numberOfVolunteers', numberOfVolunteers.errors)}}
+                </div>
+              </div>
+            </div>
+            <!-- volunteersDescription -->
+            <div class="row form-group">
+              <div class="col-md-3">
+                <label class="col-form-label">Volunteers Description :</label>
+              </div>
+              <div class="col-md-8"
+                [ngClass]="((submitted || volunteersDescription.touched) && volunteersDescription.invalid)?'has-danger':''">
+                <textarea type="text" rows="5" cols="5" class="form-control" name="volunteersDescription"
+                  placeholder="Enter Volunteers Description" #volunteersDescription="ngModel"
+                  [(ngModel)]="charity.volunteersDescription" required></textarea>
+                <div class="error-block text-left"
+                  *ngIf="((submitted || volunteersDescription.touched) && volunteersDescription.invalid)">
+                  {{showError('volunteersDescription', volunteersDescription.errors)}}
+                </div>
+              </div>
+            </div>
+            <!-- numberOfDonations -->
+            <div class="row form-group">
+              <div class="col-md-3">
+                <label class="col-form-label">Number-Of-Donations :</label>
+              </div>
+              <div class="col-md-8"
+                [ngClass]="((submitted || numberOfDonations.touched) && numberOfDonations.invalid)?'has-danger':''">
+                <input type="text" class="form-control" (keydown)="AllowNumbers($event)" name="numberOfDonations"
+                  placeholder="Enter number Of Donations" #numberOfDonations="ngModel"
+                  [(ngModel)]="charity.numberOfDonations" required>
+                <div class="error-block text-left"
+                  *ngIf="((submitted || numberOfDonations.touched) && numberOfDonations.invalid)">
+                  {{showError('numberOfDonations', numberOfDonations.errors)}}
+                </div>
+              </div>
+            </div>
+            <!-- donationDescription -->
+            <div class="row form-group">
+              <div class="col-md-3">
+                <label class="col-form-label">Donation-Description :</label>
+              </div>
+              <div class="col-md-8"
+                [ngClass]="((submitted || donationDescription.touched) && donationDescription.invalid)?'has-danger':''">
+                <textarea type="text" rows="5" cols="5" class="form-control" name="donationDescription"
+                  placeholder="Enter Donation Description " #donationDescription="ngModel"
+                  [(ngModel)]="charity.donationDescription" required></textarea>
+                <div class="error-block text-left"
+                  *ngIf="((submitted || donationDescription.touched) && donationDescription.invalid)">
+                  {{showError('donationDescription', donationDescription.errors)}}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer form-group">
+            <div class="button-group-container float-right">
+              <button type="button" class="btn btn-outline-primary" (click)="selectTab(4,charity)">Cancel</button>
+            </div>
+            <div class="button-group-container float-right">
+              <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+          </div>
+        </form>
+      </tab>
+    </tabset>
+  </div>
+</div>

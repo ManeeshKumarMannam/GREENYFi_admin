@@ -1,0 +1,49 @@
+<!-- BEGIN: Sub Header  -->
+<app-sub-header [subHeaderData]="subHeaderData"></app-sub-header>
+<!-- END: Sub Header  -->
+
+<div class="content-wrapper">
+  <div class="card animated fadeIn">
+    <!-- emailTemplateForm starts -->
+    <form #emailTemplateForm="ngForm">
+
+      <!-- emailKey -->
+      <div class="card-body">
+        <div class="row mt-2" *ngIf="emailTemplate">
+          <div class="col-md-6" [ngClass]="((submitted || emailKey.touched) && emailKey.invalid)?'has-danger':''">
+            <div class="form-group">
+              <label>Title:</label>
+              <input type="text" class="form-control" name="emailKey" #emailKey="ngModel"
+                [(ngModel)]="emailTemplate.emailKey" required>
+              <div class="error-block text-left" *ngIf="((submitted || emailKey.touched) && emailKey.invalid)">
+                {{showError('emailKey', emailKey.errors)}}
+              </div>
+            </div>
+          </div>
+          <!-- subject -->
+          <div class="col-md-6" [ngClass]="((submitted || subject.touched) && subject.invalid)?'has-danger':''">
+            <div class="form-group">
+              <label>Subject:</label>
+              <input type="text" class="form-control" name="subject" #subject="ngModel"
+                [(ngModel)]="emailTemplate.subject" required>
+              <div class="error-block text-left" *ngIf="((submitted || subject.touched) && subject.invalid)">
+                {{showError('subject', subject.errors)}}
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- BEGIN: Grapesjs Editor -->
+        <app-grapes-js [emailTemplate]="emailTemplate" [grapesjsId]='gjs' [type]="type"></app-grapes-js>
+        <!-- END: Grapesjs Editor -->
+      </div>
+      <div class="card-header text-right">
+        <button type="submit" class="btn btn-primary mr-2"
+          (click)="submitEmailTemplate(emailTemplateForm, emailTemplate)">Save</button>
+        <button type="button" class="btn btn-outline-primary"
+          [routerLink]="[URLConstants.EMAIL_TEMPLATE_list]">Cancel</button>
+      </div>
+    </form>
+    <!-- emailTemplateForm Ends -->
+
+  </div>
+</div>

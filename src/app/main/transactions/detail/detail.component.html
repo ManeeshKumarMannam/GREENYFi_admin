@@ -1,0 +1,124 @@
+<!-- BEGIN: Sub Header  -->
+<app-sub-header [subHeaderData]="subHeaderData"></app-sub-header>
+<!-- END: Sub Header  -->
+
+<div class="content-wrapper">
+  <!-- faqForm Starts -->
+  <!-- <form #faqForm="ngForm" (ngSubmit)="submitFaqForm(faqForm, faq)" autocomplete="off"> -->
+  <div class="card animated fadeIn">
+
+    <div class="card-body">
+      <div class="container-fluid">
+        <div class="form-group row">
+          <div class="col-lg-2 col-sm-3">
+            <!-- userName -->
+            <label class="col-form-label">User Name * :</label>
+          </div>
+          <div class="col-md-8 co-sm-7">
+            <div class="form-group">
+              {{transaction?.userName }}
+            </div>
+          </div>
+        </div>
+        <!-- userName -->
+
+        <!-- TransactionId Starts -->
+        <div class="form-group row">
+          <div class="col-lg-2 col-sm-3">
+            <label class="col-form-label">Transaction Id * :</label>
+          </div>
+          <div class="col-md-8 co-sm-7">
+            <div class="form-group">
+              {{transaction?.transactionId}}
+            </div>
+          </div>
+        </div>
+        <!-- TransactionId Ends -->
+
+
+        <!-- paymentMethod Starts -->
+        <div class="form-group row">
+          <div class="col-lg-2 col-sm-3">
+            <label class="col-form-label">Payment Method * :</label>
+          </div>
+          <div class="col-md-8 co-sm-7">
+            <div class="form-group">
+              {{transaction?.paymentMethod}}
+            </div>
+          </div>
+        </div>
+        <!-- paymentMethod Ends -->
+
+        <!-- status Starts -->
+        <div class="form-group row">
+          <div class="col-lg-2 col-sm-3">
+            <label class="col-form-label">Status * :</label>
+          </div>
+          <div class="col-md-8 co-sm-7">
+            <div class="form-group">
+              {{transaction?.status}}
+            </div>
+          </div>
+        </div>
+        <!-- status Ends -->
+
+
+        <!-- donationAmount Starts -->
+        <div class="form-group row">
+          <div class="col-lg-2 col-sm-3">
+            <label class="col-form-label">Donation Amount * :</label>
+          </div>
+          <div class="col-md-8 co-sm-7">
+            <div class="form-group">
+              {{transaction?.donationAmount | currency}}
+            </div>
+          </div>
+        </div>
+        <!-- donationAmount Ends -->
+
+
+        <!-- donationAmount Starts -->
+        <div class="form-group row">
+          <div class="col-lg-2 col-sm-3">
+            <label class="col-form-label">Date Of Tranction * :</label>
+          </div>
+          <div class="col-md-8 co-sm-7">
+            <div class="form-group">
+              {{transaction?.dateOfTransaction | date: 'dd/MM/yyyy'}}
+            </div>
+          </div>
+        </div>
+        <!-- donationAmount Ends -->
+        <!-- donationAmount Starts -->
+        <div class="form-group row">
+          <div class="col-lg-2 col-md-12">
+            <label class="col-form-label">Transaction Deatils * :</label>
+          </div>
+          <div>
+
+            <div class="col-md-8 co-sm-7" *ngFor="let data of transactionDeatils">
+              <div class="form-group pl-40">
+                <span>Name   : <span>{{data.name ? data.name : '---' }}</span>
+                </span><br>
+                <span>Type   : {{data.type ? data.type:'---' }}
+                </span>
+                <span>Percentage  :  {{data.percentage ? data.percentage :'---'}}</span>
+              </div>
+              <!-- <input type="text" class="form-control" name="transactionDetails" placeholder="Ente Transaction Details"
+                  [(ngModel)]="transaction.transactionDetails"> -->
+            </div>
+          </div>
+        </div>
+        <!-- donationAmount Ends -->
+        <hr />
+      </div>
+    </div>
+  </div>
+  <!-- </form> -->
+  <!-- faqForm Starts -->
+</div>
+<div class="form-group row">
+  <div class="button-group-container text-right col pr-0">
+    <button type="button" class="btn btn-outline-primary" [routerLink]="[URLConstants.TRANSACTIONS]">Cancel</button>
+  </div>
+</div>

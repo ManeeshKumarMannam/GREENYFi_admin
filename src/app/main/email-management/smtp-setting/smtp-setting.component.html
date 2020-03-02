@@ -1,0 +1,82 @@
+<!-- BEGIN: Sub Header  -->
+<app-sub-header [subHeaderData]="subHeaderData"></app-sub-header>
+<!-- END: Sub Header  -->
+<!-- <div>
+  <img src="assets/images/comingSoon.jpg" alt="no img" width="200px" height="200px">
+</div> -->
+<div class="content-wrapper">
+  <div class="card animated fadeIn">
+    <div class="card-body">
+      <!-- smtp Form Starts -->
+      <form #smtpForm="ngForm" (ngSubmit)="SubmitSMTP(smtpForm, smtp)" autocomplete="off">
+        <!-- SMTP Host Starts -->
+        <div class="form-group row">
+          <div class="col-lg-2 col-sm-3">
+            <label class="col-form-label">SMTP Host:</label>
+          </div>
+          <div class="col-md-4 co-sm-7" [ngClass]="((submitted || host.touched) && host.invalid)?'has-danger':''">
+            <input type="text" class="form-control" placeholder="SMTP Host" name="host" #host="ngModel"
+              [(ngModel)]="smtp.host" required>
+            <div class="error-block text-left" *ngIf="((submitted || host.touched) && host.invalid)">
+              {{showError('host', host.errors)}}
+            </div>
+          </div>
+        </div>
+        <!-- SMTP Host Ends -->
+
+        <!-- SMTP Port starts -->
+        <div class="form-group row">
+          <div class="col-lg-2 col-sm-3">
+            <label class="col-form-label">SMTP Port:</label>
+          </div>
+          <div class="col-md-4 co-sm-7" [ngClass]="((submitted || port.touched) && port.invalid)?'has-danger':''">
+            <input type="text" class="form-control" placeholder="SMTP Port" name="port" #port="ngModel"
+              [(ngModel)]="smtp.port" (keydown)="AllowNumbers($event)" maxlength="5" required>
+            <div class="error-block text-left" *ngIf="((submitted || port.touched) && port.invalid)">
+              {{showError('port', port.errors)}}
+            </div>
+          </div>
+        </div>
+        <!-- SMTP Port Ends -->
+
+        <!-- SMTP Username starts -->
+        <div class="form-group row">
+          <div class="col-lg-2 col-sm-3">
+            <label class="col-form-label">SMTP Username:</label>
+          </div>
+          <div class="col-md-4 co-sm-7"
+            [ngClass]="((submitted || username.touched) && username.invalid)?'has-danger':''">
+            <input type="text" class="form-control" placeholder="SMTP Username" name="username" #username="ngModel"
+              [(ngModel)]="smtp.username" required><a href="https://myaccount.google.com/lesssecureapps?pli=1">
+              <em class="fa fa-question" style="font-size: 20px" tooltip="Learn More" title="Learn More"></em></a>
+            <div class="error-block text-left" *ngIf="((submitted || username.touched) && username.invalid)">
+              {{showError('username', username.errors)}}
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-lg-2 col-sm-3">
+            <label class="col-form-label">SMTP Password:</label>
+          </div>
+          <div class="col-md-4 co-sm-7"
+            [ngClass]="((submitted || password.touched) && password.invalid)?'has-danger':''">
+            <input type="password" class="form-control" placeholder="SMTP Password" name="password" #password="ngModel"
+              [(ngModel)]="smtp.password" required>
+            <div class="error-block text-left" *ngIf="((submitted || password.touched) && password.invalid)">
+              {{showError('password', password.errors)}}
+            </div>
+          </div>
+        </div>
+        <!-- SMTP Username Ends -->
+        <hr />
+        <!-- Save Button -->
+        <div class=" form-group">
+          <div class="button-group-container float-right">
+            <button type="submit" class="btn btn-primary mr-3">Save</button>
+          </div>
+        </div>
+      </form>
+      <!-- smtp Form Ends -->
+    </div>
+  </div>
+</div>

@@ -1,0 +1,165 @@
+<!-- BEGIN: Sub Header  -->
+<app-sub-header [subHeaderData]="subHeaderData"></app-sub-header>
+<!-- END: Sub Header  -->
+<div class="content-wrapper">
+  <div class="card animated fadeIn">
+
+    <!-- causeForm Starts -->
+    <form #causeForm="ngForm" (ngSubmit)="submitCause(causeForm, cause)" class=" form-group" autocomplete="off">
+      <div class="card-body">
+
+
+        <!-- Image Ends -->
+        <div class="row  form-group">
+          <div class="row mx-auto mb-20">
+            <img *ngIf="!causeImageArray.length" class="user-profile-img" src="assets/images/noImageAvailable.png"
+              alt="no img">
+            <div class="user-profile-img" *ngFor='let image of causeImageArray; let y=index;'>
+              <i *ngIf="image" (click)="deleteImage(y)" class="fa fa-times" aria-hidden="true"></i>
+              <img [src]="image ?this.imagePath+image :'assets/images/noImageAvailable.png'" alt="no img">
+            </div>
+            <div>
+              <label>
+                <input class='file-input' style="display: none" type="file" name="photo" accept="image/*" multiple
+                  (change)="fileChangeEvent($event)" id="profile">
+              </label>
+            </div>
+            <a href="javascript:;" (click)="openfile($event)" class="camera"><em class="fa fa-camera camera"
+                aria-hidden="true"></em></a>
+          </div>
+        </div>
+
+
+        <!-- Name Starts -->
+        <div class="row form-group">
+          <div class="col-lg-2 col-sm-3">
+            <label class="col-form-label">Name *:</label>
+          </div>
+          <div class="col-xl-10 co-lg-10" [ngClass]="((submitted || name.touched) && name.invalid)?'has-danger':''">
+            <input type="text" class="form-control" name="name" placeholder="Enter name" #name="ngModel"
+              [(ngModel)]="cause.name" required>
+            <div class="error-block text-left" *ngIf="((submitted || name.touched) && name.invalid)">
+              {{showError('name', name.errors)}}
+            </div>
+          </div>
+        </div>
+        <!-- Name Ends -->
+
+        <!-- Reason-To-Donate Starts -->
+        <div class="row form-group">
+          <div class="col-lg-2 col-sm-3">
+            <label class="col-form-label">Reason-To-Donate :</label>
+          </div>
+          <!-- [ngClass]="((submitted || reasonToDonate.touched) && reasonToDonate.invalid)?'has-danger':''" -->
+          <div class="col-xl-10 co-lg-10">
+            <input type="text" class="form-control" name="reasonToDonate" placeholder="Enter reasonToDonate"
+              #reasonToDonate="ngModel" [(ngModel)]="cause.reasonToDonate" required>
+            <!-- <div class="error-block text-left"
+              *ngIf="((submitted || reasonToDonate.touched) && reasonToDonate.invalid)">
+              {{showError('reasonToDonate', reasonToDonate.errors)}}
+            </div> -->
+          </div>
+        </div>
+        <!-- Reason-To-Donate Ends -->
+
+        <!-- subTitle  Starts-->
+        <div class="row form-group">
+          <div class="col-lg-2 col-sm-3">
+            <label class="col-form-label">Sub Title :</label>
+          </div>
+          <!-- [ngClass]="((submitted || reasonToDonate.touched) && reasonToDonate.invalid)?'has-danger':''" -->
+          <div class="col-xl-10 co-lg-10">
+            <input type="text" class="form-control" name="subTitle" placeholder="Enter Sub Title " #subTitle="ngModel"
+              [(ngModel)]="cause.subTitle" required>
+            <!-- <div class="error-block text-left" *ngIf="((submitted || subTitle.touched) && subTitle.invalid)">
+              {{showError('subTitle', subTitle.errors)}}
+            </div> -->
+          </div>
+        </div>
+        <!-- subTitle  Ends-->
+        <!-- subDescription starts -->
+        <div class="form-group row">
+          <div class="col-lg-2 col-sm-3">
+            <label class="col-form-label">Sub Description :</label>
+          </div>
+          <div class="col-xl-10 co-lg-10 co-sm-7">
+            <div class="form-group">
+              <textarea type="text" rows="5" cols="5" maxlength="180" class="form-control" name="subDescription"
+                placeholder="Enter Sub Description " #subDescription="ngModel"
+                [(ngModel)]="cause.subDescription"></textarea>
+              <div style="font-size: 13px">Hint : Sub description should contain maximum 180 characters only</div>
+              <!-- <div class="error-block text-left" *ngIf="(subDescription.touched && subDescription.invalid)">
+          {{showError('subDescription', subDescription.errors)}}
+        </div> -->
+            </div>
+          </div>
+        </div>
+        <!-- subDescription Ends -->
+        <!-- Description starts -->
+        <div class="form-group row">
+          <div class="col-lg-2 col-sm-3">
+            <label class="col-form-label">Description :</label>
+          </div>
+          <div class="col-xl-10 co-lg-12">
+            <div class="form-group">
+              <!-- BEGIN: Grapesjs Editor -->
+              <app-grapes-js [emailTemplate]="grapesJsData" [type]="type" [grapesjsId]="gjs"></app-grapes-js>
+              <!-- END: Grapesjs Editor -->
+            </div>
+          </div>
+        </div>
+        <!-- Description Ends -->
+
+
+        <!-- SubTitle Description  Starts-->
+        <div class="row form-group">
+          <div class="col-lg-2 col-sm-3">
+            <label class="col-form-label">Sub-Title-Description :</label>
+          </div>
+          <!-- [ngClass]="((submitted || subTitleDescription.touched) && subTitleDescription.invalid)?'has-danger':''" -->
+          <div class="col-xl-10 co-lg-10">
+            <input type="text" class="form-control" name="subTitleDescription"
+              placeholder="Enter Sub Title Description " #subTitleDescription="ngModel"
+              [(ngModel)]="cause.subTitleDescription" required>
+            <!-- <div class="error-block text-left"
+              *ngIf="((submitted || subTitleDescription.touched) && subTitleDescription.invalid)">
+              {{showError('subTitleDescription', subTitleDescription.errors)}}
+            </div> -->
+          </div>
+        </div>
+        <!-- SubTitle Description  Ends-->
+
+        <!-- Charities  starts-->
+        <div class="row form-group">
+          <div class="col-lg-2 col-sm-3">
+            <label class="col-form-label">Charities :</label>
+          </div>
+          <!-- [ngClass]="((submitted || subTitleDescription.touched) && subTitleDescription.invalid)?'has-danger':''" -->
+          <div class="col-xl-10 co-lg-10">
+            <ng-select class="ng-select-line" [items]="causesArray" bindLabel="name" bindValue="_id" name="ratingValue"
+              placeholder="Select Charity" [clearable]='false' [searchable]='true' autocomplete="false" multiple="true"
+              [dropdownPosition]="'auto'" name="role" #ratingValue="ngModel" [(ngModel)]="cause.ratingValue" required>
+            </ng-select>
+            <!-- <div class="error-block text-left" *ngIf="((submitted || ratingValue.touched) && ratingValue.invalid)">
+              {{showError('ratingValue', ratingValue.errors)}}
+            </div> -->
+          </div>
+        </div>
+        <!-- Charities  Ends-->
+      </div>
+
+
+      <!-- Submit and Cancel Starts -->
+      <div class="card-footer form-group">
+        <div class="button-group-container text-right">
+          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="button" class="btn btn-outline-primary" [routerLink]="[URLConstants.CAUSE]">Cancel</button>
+        </div>
+      </div>
+      <!-- Submit and Cancel Ends -->
+    </form>
+
+
+    <!-- causeForm Ends -->
+  </div>
+</div>

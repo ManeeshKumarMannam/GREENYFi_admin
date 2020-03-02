@@ -1,0 +1,97 @@
+<!-- BEGIN: Sub Header  -->
+<app-sub-header [subHeaderData]="subHeaderData"></app-sub-header>
+<!-- END: Sub Header  -->
+
+<div class="content-wrapper" *ngIf="!faqID">
+  <!-- inquiryForm Starts -->
+  <form #inquiryForm="ngForm" (ngSubmit)="submitInquiryForm(inquiryForm, inquiry)" autocomplete="off">
+    <div class="card animated fadeIn">
+      <div class="card-body">
+        <div class="container-fluid">
+          <div class="form-group row mb-0">
+            <div class="col-lg-2 col-sm-3">
+              <!-- Email ID Starts -->
+              <label class="col-form-label">EmailId * :</label>
+            </div>
+            <div class="col-md-8 co-sm-7"
+              [ngClass]="((submitted || emailId.touched) && emailId.invalid)?'has-danger':''">
+              <div class="form-group">
+                <input type="text" class="form-control" name="emailId" placeholder="Enter Question" #emailId="ngModel"
+                  [(ngModel)]="inquiry.emailId" maxlength="70" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+                  required>
+                <div class="error-block text-left" *ngIf="((submitted || emailId.touched) && emailId.invalid)">
+                  {{showError('emailId', emailId.errors)}}
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Email ID Ends -->
+
+          <!-- Message Starts -->
+
+          <div class="form-group row">
+            <div class="col-lg-2 col-sm-3">
+              <label class="col-form-label">Message * :</label>
+            </div>
+            <div class="col-md-8 co-sm-7"
+              [ngClass]="((submitted || message.touched) && message.invalid)?'has-danger':''">
+              <div class="form-group">
+                <textarea name="message" class="form-control" placeholder="Enter Message" rows="5" #message="ngModel"
+                  [(ngModel)]="inquiry.message" maxlength="130" required></textarea>
+
+                <div class="error-block text-left" *ngIf="((submitted || message.touched) && message.invalid)">
+                  {{showError('message', message.errors)}}
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Message Ends -->
+          <hr />
+          <!-- Save and cancel button Starts -->
+          <div class="form-group">
+            <div class="button-group-container float-right">
+              <button type="submit" class="btn btn-primary mr-2">Save</button>
+              <button type="button" class="btn btn-outline-primary"
+                [routerLink]="[URLConstants.INQUIRY]">Cancel</button>
+            </div>
+          </div>
+          <!-- Save and cancel button Ends -->
+
+        </div>
+      </div>
+    </div>
+  </form>
+  <!-- inquiryForm Ends -->
+</div>
+
+
+
+
+
+<!-- BEGIN: Sub Header  -->
+
+<div class="content-wrapper" *ngIf="faqID">
+  <div class="row">
+    <div class="col-md-9">
+      <div class="card animated fadeIn">
+        <div class="card-body user-detail mb-2">
+          <div class="form-group row mb-0">
+            <div class="col-lg-12">
+              <div class="profile-info text-left p-3">
+                <span><strong>Email : </strong>{{inquiryDeatils?.emailId}}</span>
+                <span><strong>Meaasge : </strong>{{inquiryDeatils?.message}}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="row button-group">
+            <div class="col-xl-12 col-lg-6  text-left pl-4 ml-2  mb-3">
+              <button type="button" class="btn btn-primary" [routerLink]="[URLConstants.INQUIRY]">Back</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

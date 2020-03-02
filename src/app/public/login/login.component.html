@@ -1,0 +1,82 @@
+<div class="authentic-page">
+  <div class="authentic-wrapper">
+    <div class="row">
+      <div class="col-md-6 p-0 login-logo">
+        <img src="assets/images/logo.png" class="header-logo" alt="IndiaNic" title="IndiaNic" />
+      </div>
+      <div class="col-md-6 p-0">
+        <div class="login-container">
+          <div class="login-section">
+            <h3 class="pb-2">Sign in to your account</h3>
+            <!-- SignUp Form Starts -->
+            <form class="example-form" #loginForm="ngForm" (ngSubmit)="onLogin(loginForm, user)"
+              content-type="application/x-www-form-urlencoded">
+              <!-- Email Starts-->
+              <div class='form-group row'>
+                <label htmlFor="Email">Email:</label>
+                <div class="col-md-12" [ngClass]="((submitted || emailId.touched) && emailId.invalid)?'has-danger':''">
+                  <input class="form-control" placeholder="Email" type="emailId" name="emailId"
+                    pattern="[^@\s]+@[^@\s]+\.[^@\s]+" autocomplete="on" [(ngModel)]="user.emailId" value=""
+                    id="emailId" required #emailId="ngModel" />
+                  <em class='fa fa-user' aria-hidden='true'></em>
+                  <div class="error-block text-left" *ngIf="((submitted || emailId.touched) && emailId.invalid)">
+                    {{showError('emailId', emailId.errors)}}
+                  </div>
+                </div>
+              </div>
+              <!-- Email Ends-->
+
+
+              <!-- Password Starts-->
+              <div class='form-group row'>
+                <label htmlFor="Password">Password:</label>
+                <div class="col-md-12"
+                  [ngClass]="((submitted || password.touched) && password.invalid)?'has-danger':''">
+                  <input class="form-control" placeholder="Password" type="password" name="password"
+                    [(ngModel)]="user.password"  value="" autocomplete="on" id="password" required
+                    #password="ngModel" />
+                  <em class='fa fa-lock' aria-hidden='true'></em>
+                  <div class="error-block text-left" *ngIf="((submitted || password.touched) && password.invalid)">
+                    {{showError('password', password.errors)}}
+                  </div>
+                </div>
+              </div>
+              <!-- Password Ends-->
+
+
+
+              <!-- Login Button Starts -->
+              <div class='mt-5'>
+                <button class='btn btn-block btn-primary' type='submit'> Login </button>
+              </div>
+              <!-- Login Button Ends -->
+
+
+              <!-- Remember Password Starts-->
+              <div class='row'>
+                <div class='col-md-6 col-sm-6'>
+                  <div class='checkbox mt-3'>
+                    <label>
+                      <input type="checkbox" name="status" [(ngModel)]="user.rememberMe">
+                      <span></span> Remember Password
+                    </label>
+                  </div>
+                </div>
+                <!-- Remember Password Ends-->
+
+                <!-- Forgot password starts -->
+                <div class='col-md-6 col-sm-6'>
+                  <div class='mt-3 text-right'>
+                    <a class='auth-link text-gray' (click)='showForgotPassword()'> Forgot password? </a>
+                  </div>
+                </div>
+                <!-- Forgot password Ends -->
+              </div>
+            </form>
+            <!-- SignUp Form Ends -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

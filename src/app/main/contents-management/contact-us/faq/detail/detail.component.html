@@ -1,0 +1,60 @@
+<!-- BEGIN: Sub Header  -->
+<app-sub-header [subHeaderData]="subHeaderData"></app-sub-header>
+<!-- END: Sub Header  -->
+
+<div class="content-wrapper">
+  <!-- faqForm Starts -->
+  <form #faqForm="ngForm" (ngSubmit)="submitFaqForm(faqForm, faq)" autocomplete="off">
+    <div class="card animated fadeIn">
+
+      <div class="card-body">
+        <div class="container-fluid">
+          <div class="form-group row">
+            <div class="col-lg-2 col-sm-3">
+              <!-- Question Starts -->
+              <label class="col-form-label">Question * :</label>
+            </div>
+            <div class="col-md-8 co-sm-7"
+              [ngClass]="((submitted || question.touched) && question.invalid)?'has-danger':''">
+              <div class="form-group">
+                <input type="text" class="form-control" name="question" placeholder="Enter Question" #question="ngModel"
+                  [(ngModel)]="faq.question" maxlength="70" required>
+                <div class="error-block text-left" *ngIf="((submitted || question.touched) && question.invalid)">
+                  {{showError('question', question.errors)}}
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Question Ends -->
+
+          <!-- Answer Starts -->
+          <div class="form-group row">
+            <div class="col-lg-2 col-sm-3">
+              <label class="col-form-label">Answer * :</label>
+            </div>
+            <div class="col-md-8 co-sm-7" [ngClass]="((submitted || answer.touched) && answer.invalid)?'has-danger':''">
+              <div class="form-group">
+                <textarea name="answer" class="form-control" placeholder="Enter Answer" rows="5" #answer="ngModel"
+                  [(ngModel)]="faq.answer" maxlength="130" required></textarea>
+                <div class="error-block text-left" *ngIf="((submitted || answer.touched) && answer.invalid)">
+                  {{showError('answer', answer.errors)}}
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Answer Ends -->
+          <hr />
+          <!-- Save and cancel button Starts -->
+          <div class="form-group">
+            <div class="button-group-container float-right">
+              <button type="submit" class="btn btn-primary mr-2">Save</button>
+              <button type="button" class="btn btn-outline-primary" [routerLink]="[URLConstants.FAQ]">Cancel</button>
+            </div>
+          </div>
+          <!-- Save and cancel button Ends -->
+        </div>
+      </div>
+    </div>
+  </form>
+  <!-- faqForm Starts -->
+</div>

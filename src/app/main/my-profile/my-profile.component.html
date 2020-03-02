@@ -1,0 +1,90 @@
+<!-- BEGIN: Sub Header  -->
+<app-sub-header [subHeaderData]="subHeaderData"></app-sub-header>
+<!-- END: Sub Header  -->
+
+<div class="content-wrapper">
+	<div class="card animated fadeIn">
+		<!-- adminProfile Section Form Starts -->
+
+		<form #adminForm='ngForm' (ngSubmit)="submitForm(adminForm,admin)" autocomplete="off">
+			<div class="card-body">
+				<div class="row justify-content-center">
+					<div class="col-xl-6 col-md-12 profile-form">
+						<!-- First Name Starts -->
+						<div class="form-group row">
+							<label class="col-form-label col">First Name</label>
+							<div class="form-field"
+								[ngClass]="((submitted || firstname.touched) && firstname.invalid)?'has-danger':''">
+								<input class='form-control' type="text" name="firstname" [(ngModel)]="admin.firstname"
+									placeholder="Enter First Name" id="firstname" #firstname="ngModel" required />
+								<div class="form-control-feedback error-block"
+									*ngIf="((submitted || firstname.touched) && firstname.invalid)">
+									{{showError('firstname', firstname.errors)}}
+								</div>
+							</div>
+						</div>
+						<!-- First Name Ends -->
+
+						<!-- Last Name Starts -->
+						<div class="form-group row">
+							<label class="col-form-label col">Last Name</label>
+							<div class="form-field"
+								[ngClass]=" ((submitted || lastname.touched) && lastname.invalid)?'has-danger':''">
+								<input class='form-control' type="text" name="lastname" [(ngModel)]="admin.lastname"
+									placeholder="Enter Last Name" id="lastname" #lastname="ngModel" required />
+								<div class="form-control-feedback error-block"
+									*ngIf="((submitted || lastname.touched) && lastname.invalid)">
+									{{showError('lastname', lastname.errors)}}
+								</div>
+							</div>
+						</div>
+						<!-- Last Name Ends -->
+
+						<!-- Email Starts -->
+						<div class="form-group row">
+							<label class="col-form-label col">Email</label>
+							<div class="form-field">
+								<input type="email" class='form-control' name="email" [value]="email" [disabled]="true">
+							</div>
+						</div>
+						<!-- Email Ends -->
+
+						<!-- Contact Number Starts -->
+						<div class="form-group row">
+							<label class="col-form-label col">Contact Number</label>
+							<div class="form-field"
+								[ngClass]="((submitted || mobile.touched) && mobile.invalid)?'has-danger':''">
+								<input class='form-control' (keydown)="AllowNumbers($event)" minlength="10"
+									maxlength="14" type="text" name="mobile" [(ngModel)]="admin.mobile"
+									placeholder="Enter mobile " id="mobile" required #mobile="ngModel" />
+								<div class="form-control-feedback error-block"
+									*ngIf="((submitted || mobile.touched) && mobile.invalid)">
+									{{showError('phoneNo', mobile.errors)}}
+								</div>
+							</div>
+						</div>
+						<!-- Contact Number Ends -->
+
+
+						<div class="form-group row">
+							<div class="col pr-0">
+								<hr />
+							</div>
+						</div>
+
+						<!-- Submit and Cancel Button Starts -->
+						<div class="form-group row">
+							<div class="button-group-container text-right col pr-0">
+								<button type="submit" class="btn btn-primary">Submit</button>
+								<button type="button" class="btn btn-outline-primary"
+									[routerLink]="[URLConstants.DASHBOARD]">Cancel</button>
+							</div>
+						</div>
+						<!-- Submit and Cancel Button Ends -->
+					</div>
+				</div>
+			</div>
+		</form>
+		<!-- Adminprofile Form Section Ends -->
+	</div>
+</div>

@@ -1,0 +1,148 @@
+<!-- BEGIN: Sub Header  -->
+<app-sub-header [subHeaderData]="subHeaderData"></app-sub-header>
+<!-- END: Sub Header  -->
+
+<div class="content-wrapper">
+  <div class="card animated fadeIn">
+    <!-- AddAdmin Admin Form Starts -->
+    <form #adminForm="ngForm" (ngSubmit)="addAdmin(adminForm,admin)" autocomplete="off">
+
+      <div class="card-body">
+        <div class="container mt-3">
+          <div class="form-group row">
+            <!-- Profile Image Starts -->
+            <div class="col-sm-3 col-lg-2 col-sm-3">
+              <label class=" col-form-label">Profile Image:</label>
+            </div>
+            <div class="mb-3 col-md-4">
+              <ngx-file-drop dropZoneLabel="Choose a file or drag it here" (onFileDrop)="dropped($event)"
+                (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)" accept="png">
+                <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+                  <span (click)="openFileSelector($event)" class="file-uploder">
+                    <span class="fa fa-upload"></span>
+                    <span><strong>Choose a file</strong> or drag it here</span>
+                  </span>
+                </ng-template>
+              </ngx-file-drop>
+              <div *ngIf="imageUrl" class="preview-wrapper">
+                <div class="preview-img">
+                  <img [src]="imageUrl ? imageUrl : 'assets/images/noImageAvailable.png'" alt="no img">
+                </div>
+                <span class="image-name">Preview image name</span>
+                <span class="fa fa-times close-image" aria-hidden="true" (click)="cancelUploadImage()"></span>
+              </div>
+              <span class="float-right"><button type="button" class="btn btn-primary mt-3"
+                  (click)="uploadImage()">Upload
+                  Image</button></span>
+            </div>
+            <div class="col-md-4">
+              <img [src]="admin.photo ? this.imagePath + admin.photo : 'assets/images/noImageAvailable.png'"
+                alt="no img" height="100px">
+            </div>
+          </div>
+          <!-- Profile Image Ends -->
+
+          <!-- First Name Starts -->
+          <div class="form-group row">
+            <div class="col-lg-2 col-sm-3">
+              <label class=" col-form-label">First Name:</label>
+            </div>
+            <div class="col-md-8 co-sm-7"
+              [ngClass]="((submitted || firstname.touched) && firstname.invalid)?'has-danger':''">
+              <input class="form-control" type="text" id="inputName" placeholder="Enter First Name" name="firstname"
+                #firstname="ngModel" [(ngModel)]="admin.firstname" required>
+              <div class="error-block text-left" *ngIf="((submitted || firstname.touched) && firstname.invalid)">
+                {{showError('firstname', firstname.errors)}}
+              </div>
+            </div>
+          </div>
+          <!-- First Name Ends -->
+
+          <!-- Last Name Starts -->
+          <div class="form-group row">
+            <div class="col-lg-2 col-sm-3">
+              <label class="col-form-label">Last Name:</label>
+            </div>
+            <div class="col-md-8 co-sm-7"
+              [ngClass]="((submitted || lastname.touched) && lastname.invalid)?'has-danger':''">
+              <input class="form-control" type="text" id="inputName" placeholder="Enter Last Name" name="lastname"
+                #lastname="ngModel" [(ngModel)]="admin.lastname" required>
+              <div class="error-block text-left" *ngIf="((submitted || lastname.touched) && lastname.invalid)">
+                {{showError('lastname', lastname.errors)}}
+              </div>
+            </div>
+          </div>
+          <!-- Last Name Ends -->
+
+          <!-- Role Starts -->
+          <div class="form-group row">
+            <div class="col-lg-2 col-sm-3">
+              <label class="col-form-label">Role:</label>
+            </div>
+            <div class="col-md-8 co-sm-7" *ngIf="roleList">
+              <ng-select class="ng-select-line"
+                [ngClass]="((submitted || roleName.touched) && roleName.invalid)?'has-danger':''"
+                [items]="this.roleList" bindLabel="role" placeholder="Select Role" [clearable]='false'
+                [searchable]='false' autocomplete="false" [dropdownPosition]="'auto'" name="role" #roleName="ngModel"
+                [(ngModel)]="admin.role" required>
+              </ng-select>
+              <div class="error-block text-left" *ngIf="((submitted || roleName.touched) && roleName.invalid)">
+                {{showError('roleName', roleName.errors)}}
+              </div>
+            </div>
+          </div>
+          <!-- Role Ends -->
+
+          <!-- Email Stats -->
+          <div class="form-group row">
+            <div class="col-lg-2 col-sm-3">
+              <label class="col-form-label">E-mail:</label>
+            </div>
+            <div class="col-md-8 co-sm-7"
+              [ngClass]="((submitted || emailId.touched) && emailId.invalid)?'has-danger':''">
+              <input class="form-control" type="text" id="inputName" placeholder="Enter E-mail" name="emailId"
+                #emailId="ngModel" [disabled]="adminUserId" [(ngModel)]=" admin.emailId"
+                pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" required>
+              <div class="error-block text-left" *ngIf="((submitted || emailId.touched) && emailId.invalid)">
+                {{showError('emailId', emailId.errors)}}
+              </div>
+            </div>
+          </div>
+          <!-- Role Ends -->
+
+          <!-- Mobile Starts -->
+          <div class="form-group row">
+            <div class="col-lg-2 col-sm-3">
+              <label class="col-form-label">Phone Number:</label>
+            </div>
+            <div class="col-md-8 co-sm-7" [ngClass]="((submitted || mobile.touched) && mobile.invalid)?'has-danger':''">
+              <input class="form-control" type="text" id="inputName" placeholder="Enter Phone Number" name="mobile"
+                #mobile="ngModel" [(ngModel)]="admin.mobile" required minlength="10" maxlength="10"
+                (keydown)="AllowNumbers($event)">
+              <div class="error-block text-left" *ngIf="((submitted || mobile.touched) && mobile.invalid)">
+                {{showError('mobile', mobile.errors)}}
+              </div>
+            </div>
+          </div>
+
+          <!-- Ststus Ends -->
+        </div>
+      </div>
+      <!-- <div class="form-group"> -->
+
+      <!-- </div> -->
+      <div class="card-footer form-group">
+        <div class="button-group-container float-right mr-2">
+          <button type="button" class="btn btn-outline-primary"
+            [routerLink]="[URLConstants.ADMINUSER_LIST]">Cancel</button>
+        </div>
+        <div class="button-group-container float-right">
+          <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+
+      </div>
+
+    </form>
+    <!-- AddAdmin Admin Form Ends -->
+  </div>
+</div>

@@ -1,0 +1,32 @@
+<app-sub-header [subHeaderData]="subHeaderData"></app-sub-header>
+<!-- END: Sub Header  -->
+
+<div class="content-wrapper">
+  <form #form="ngForm" (ngSubmit)="submitEmailSettings(form, emailSettings)" autocomplete="off">
+    <div class="card animated fadeIn">
+      <div class="card-body">
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" class="form-control" type="checkbox" name="transactionNotification"
+              placeholder="Enter transactionNotification" name="transactionNotification"
+              [(ngModel)]="emailSettings.transactionNotification" #roleName="ngModel" required>
+            <span></span>
+            Transctions
+          </label>
+        </div>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" class="form-control" class="form-control" type="checkbox" name="enquiryNotification"
+              placeholder="Enter enquiryNotification" name="enquiryNotification"
+              [(ngModel)]="emailSettings.enquiryNotification" #roleName="ngModel" required>
+            <span></span>
+            Inquiry
+          </label>
+        </div>
+        <button type="submit" class="btn btn-primary ">Save</button>
+      </div>
+    </div>
+
+  </form>
+
+</div>

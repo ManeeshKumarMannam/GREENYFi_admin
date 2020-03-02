@@ -1,0 +1,17 @@
+<div class="page-wrap">
+    <!-- header/header.component.html -->
+    <app-header></app-header>
+    <div class="admin-wrapper">
+        <!-- sidebar/sidebar.component.html -->
+        <div class="admin-aside-left lightScroll" malihu-scrollbar [scrollbarOptions]="Verticalscrollbar">
+            <app-sidebar></app-sidebar>
+        </div>
+        <div class="admin-content-wrapper">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>
+<!-- <footer class="page-footer">
+    <div style="width: 100%;" class="text-center">Copyright &copy; {{currentYear}}. All rights reserved.</div>
+</footer> -->
+<div class="m-aside-left-overlay" (click)="overlayHide();"></div>

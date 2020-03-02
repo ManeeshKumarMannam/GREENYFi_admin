@@ -1,0 +1,156 @@
+<!-- BEGIN: Sub Header  -->
+<app-sub-header [subHeaderData]="subHeaderData"></app-sub-header>
+<!-- END: Sub Header  -->
+<!-- <div>
+  <img src="assets/images/comingSoon.jpg" alt="no img" width="200px" height="200px">
+</div> -->
+<div class="content-wrapper">
+  <div class="card animated fadeIn adminEmail">
+    <div class="card-header">
+      <div class="container my-3">
+        <div class="row" *ngIf="!editDefaultEmail">
+          <div class="col-md-5">
+            <label><strong>Default From E-mail:</strong></label>
+            <label class="ml-2" *ngIf="defaultEmail.defaultFromEmail">{{defaultEmail.defaultFromEmail}}</label>
+            <label class="ml-2" *ngIf="!defaultEmail.defaultFromEmail">--</label>
+          </div>
+          <div class="col-md-5">
+            <label><strong>Default Admin E-mail:</strong></label>
+            <label class="ml-2" *ngIf="defaultEmail.defaultAdminEmail">{{defaultEmail.defaultAdminEmail}}</label>
+            <label class="ml-2" *ngIf="!defaultEmail.defaultAdminEmail">--</label>
+          </div>
+          <div class="col-md-2">
+            <em class="fa fa-pencil-square-o blue cursor" aria-hidden="true" (click)="showEditDefaultEmail()"
+              *ngIf="rolePermission.emailSettingsAccess.edit"></em>
+          </div>
+        </div>
+        <form #defaultEmailForm="ngForm" (ngSubmit)="saveDefaultEmail(defaultEmailForm, defaultEmail)"
+          autocomplete="off">
+          <div class="row" *ngIf="editDefaultEmail">
+            <div class="col-md-5"
+              [ngClass]="((submitted || defaultFromEmail.touched) && defaultFromEmail.invalid)?'has-danger':''">
+              <label><strong>Default From E-mail:</strong></label>
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="default from email" name="defaultFromEmail"
+                  #defaultFromEmail="ngModel" [(ngModel)]="defaultEmail.defaultFromEmail" required
+                  pattern="[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})">
+                <div class="error-block text-left"
+                  *ngIf="((submitted || defaultFromEmail.touched) && defaultFromEmail.invalid)">
+                  {{showError('defaultFromEmail', defaultFromEmail.errors)}}
+                </div>
+              </div>
+            </div>
+            <div class="col-md-5"
+              [ngClass]="((submitted || defaultAdminEmail.touched) && defaultAdminEmail.invalid)?'has-danger':''">
+              <label><strong>Default Admin E-mail:</strong></label>
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="default Admin email" name="defaultAdminEmail"
+                  #defaultAdminEmail="ngModel" [(ngModel)]="defaultEmail.defaultAdminEmail" required
+                  pattern="[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})">
+                <div class="error-block text-left"
+                  *ngIf="((submitted || defaultAdminEmail.touched) && defaultAdminEmail.invalid)">
+                  {{showError('defaultAdminEmail', defaultAdminEmail.errors)}}
+                </div>
+              </div>
+            </div>
+            <div class="col-md-2 tickCross">
+              <em class="fa fa-check mr-3 cursor green" aria-hidden="true"
+                (click)="saveDefaultEmail(defaultEmailForm, defaultEmail)"></em>
+              <em class="fa fa-times cursor red" aria-hidden="true" (click)="showEditDefaultEmail()"></em>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="card-body">
+      <div *ngFor="let i of email; let index = index">
+        <ng-container *ngIf="!i.editable">
+          <div class="row py-3 align-items-center">
+            <div class="col-md-3">
+              <label><strong>Select Event</strong></label>
+              <label>{{i.emailTitle}}</label>
+            </div>
+            <div class="col-md-3">
+              <label><strong>From E-mail</strong></label>
+              <label>{{i.fromEmail}}</label>
+            </div>
+            <div class="col-md-3" *ngIf="i.adminEmail">
+              <label><strong>Admin E-mail</strong></label>
+              <label>{{i.adminEmail}}</label>
+            </div>
+            <div class="col-md-3" *ngIf="!i.adminEmail">
+              <label><strong>Admin E-mail</strong></label>
+              <label>--</label>
+            </div>
+            <div class="col-md-3 email-action">
+              <span class="fa fa-pencil-square-o blue cursor mr-3" aria-hidden="true" (click)="edit(i)"
+                *ngIf="rolePermission.emailSettingsAccess.edit"></span>
+              <span class="fa fa-trash red cursor" aria-hidden="true" (click)="delete(i)"
+                *ngIf="rolePermission.emailSettingsAccess.delete"></span>
+            </div>
+          </div>
+        </ng-container>
+        <form #emailForm="ngForm" (ngSubmit)="saveEdit(emailForm,i)">
+          <ng-container *ngIf="i.editable">
+            <div class="row py-3 align-items-center">
+              <div class="col-md-3"
+                [ngClass]="((submitted || emailTemplateId.touched) && emailTemplateId.invalid)?'has-danger':''">
+                <label><strong>Select Event</strong></label>
+
+                <ng-select [items]="EmailTitleList" bindLabel="emailTitle" placeholder="Select" [clearable]='false'
+                  [searchable]='false' [dropdownPosition]="'auto'" required [name]="'emailTemplateId'+index"
+                  #emailTemplateId="ngModel" [(ngModel)]="i.emailTemplateId" #emailTemplateId="ngModel" required>
+                </ng-select>
+                <div class="error-block text-left"
+                  *ngIf="((submitted || emailTemplateId.touched) && emailTemplateId.invalid)">
+                  {{showError('emailTemplateId', emailTemplateId.errors)}}
+                </div>
+              </div>
+              <div class="col-md-3" [ngClass]="((submitted || fromEmail.touched) && fromEmail.invalid)?'has-danger':''">
+                <label><strong>From E-mail</strong></label>
+
+                <div class="form-group">
+                  <input type="text" class="form-control" placeholder="from email" [name]="'fromEmail'+index"
+                    [(ngModel)]="i.fromEmail" #fromEmail="ngModel"
+                    pattern="[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})"
+                    required>
+                </div>
+                <div class="error-block text-left" *ngIf="((submitted || fromEmail.touched) && fromEmail.invalid)">
+                  {{showError('fromEmail', fromEmail.errors)}}
+                </div>
+              </div>
+              <div class="col-md-3">
+                <label><strong>Admin E-mail</strong></label>
+
+                <div class="form-group">
+                  <input type="text" class="form-control" placeholder="Admin email" [name]="'adminEmail'+index"
+                    [(ngModel)]="i.adminEmail" #adminEmail="ngModel"
+                    pattern="[A-Za-z0-9._%+-]{3,}@[a-zA-Z]{3,}([.]{1}[a-zA-Z]{2,}|[.]{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,})">
+                  <div class="error-block text-left" *ngIf="((submitted || adminEmail.touched) && adminEmail.invalid)">
+                    {{showError('adminEmail', adminEmail.errors)}}
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3 email-action">
+                <span class="fa fa-check mr-3 cursor green" aria-hidden="true" (click)="saveEdit(emailForm, i)"></span>
+                <span *ngIf="!addNew" class="fa fa-times cursor red" aria-hidden="true" (click)="cancelEdit(i)"></span>
+                <span *ngIf="addNew" class="fa fa-times cursor red" aria-hidden="true"
+                  (click)="canceladdNewEmail(index)"></span>
+              </div>
+            </div>
+          </ng-container>
+        </form>
+      </div>
+      <div *ngIf="!email.length">No Records Found</div>
+      <div class=" form-group mt-2">
+        <div class="button-group-container float-right">
+          <button type="button" class="btn btn-primary mr-2" (click)="addNewEmail()"
+            *ngIf="rolePermission.emailSettingsAccess.create">
+            <span class="fa fa-plus" aria-hidden="true"></span>
+            Add
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

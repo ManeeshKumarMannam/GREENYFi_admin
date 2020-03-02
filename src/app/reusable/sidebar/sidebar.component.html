@@ -1,0 +1,168 @@
+<nav class="nav" role="navigation">
+  <div class="header-brand">
+    <div class="header-brand-inner">
+      <a class="brand-logo" href="javascript:;" [routerLink]="[URLConstants.DASHBOARD]">
+        <img src="assets/images/logo.png" class="header-logo" alt="Rosity Charity" title="Rosity Charity" />
+        <img src="assets/images/rosity.png" class="header-icon" alt="Rosity Charity" title="Rosity Charity" /></a>
+      <div class="brand-tools">
+      </div>
+    </div>
+  </div>
+  <div class="text-center user-profile">
+    <!-- <div class="thumb-img">
+        <img [src]="photo ? photo : '/assets/images/NoProfile.png'" alt="no img" />
+      </div> -->
+    <span style="color:#7cb650;font-size: larger;font-weight: 500;">
+      {{firstname}}{{lastname}}
+    </span>
+  </div>
+  <ul class="sidebar nav__list" (click)="checkSideNav($event)">
+    <!-- DASHBOARD -->
+    <li routerLinkActive='active' class="nav-item">
+      <a class="nav-link" [routerLink]="[URLConstants.DASHBOARD]">
+        <span class="nav-link-icon fa fa-tachometer"></span>
+        <span class="nav-link-text">Dashboard</span>
+      </a>
+    </li>
+    <!-- USER -->
+    <!-- [hidden]="!rolePermission['user-GuestUserAccess'].viewList && !rolePermission.adminUserAccess.viewList" -->
+    <!-- [hidden]="!rolePermission['user-GuestUserAccess'].viewList && !rolePermission.adminUserAccess.viewList" -->
+    <li class="nav-item parent">
+      <a class="nav-link">
+        <span class="nav-link-icon fa fa-users" aria-hidden="true"></span>
+        <span class="nav-link-text">Users Management</span>
+        <span class="fa fa-angle-right drop-arrow arrow"></span>
+      </a>
+      <ul>
+        <!-- [hidden]="!rolePermission['user-GuestUserAccess'].viewList" -->
+        <!-- [hidden]="!rolePermission['user-GuestUserAccess'].viewList" -->
+        <li routerLinkActive="sub-nav-active">
+          <a [routerLink]="[URLConstants.USERS]">Register Users</a>
+        </li>
+        <li routerLinkActive="sub-nav-active">
+          <!-- [hidden]="!rolePermission['user-GuestUserAccess'].viewList" -->
+          <a [routerLink]=" [URLConstants.GUESTUSERS_LIST]">Guest Users</a>
+        </li>
+        <!-- [hidden]="!rolePermission.adminUserAccess.viewList" -->
+        <li routerLinkActive="sub-nav-active">
+          <!-- *ngIf="accessPermission.adminUserAccess.viewList" -->
+          <!-- <a [routerLink]="[URLConstants.ADMINUSER_LIST]">Admin Users</a> -->
+          <a [routerLink]="[URLConstants.ADMINUSER_LIST]">Admin Users</a>
+        </li>
+      </ul>
+    </li>
+    <!-- CONTENTS MANAGEMENT -->
+    <!-- [hidden]="!rolePermission['enquiryAccess'].viewList && !rolePermission['contentManagementAccess'].viewList" -->
+    <!-- <li class="nav-item parent">
+      <a class="nav-link" href="javascript:;">
+        <span class="nav-link-icon fa fa-pencil-square-o" aria-hidden="true"></span>
+        <span class="nav-link-text">Content Management</span>
+        <span class="fa fa-angle-right drop-arrow arrow"></span>
+      </a>
+      <ul>
+        <li routerLinkActive="sub-nav-active" [hidden]="!rolePermission['contentManagementAccess'].viewList">
+          <a [routerLink]="[URLConstants.HOME]" href="javascript:;">Home</a>
+        </li>
+        <li routerLinkActive="sub-nav-active" [hidden]="!rolePermission['contentManagementAccess'].viewList">
+          <a [routerLink]="[URLConstants.ABOUT_US]" href="javascript:;">About US</a>
+        </li>
+        <li routerLinkActive="sub-nav-active" [hidden]="!rolePermission['contentManagementAccess'].viewList">
+          <a [routerLink]="[URLConstants.CMS]" href="javascript:;">CMS</a>
+        </li>
+        <li class="nav-item parent" [hidden]=" !rolePermission['enquiryAccess'].viewList ">
+          <a class="nav-link" href="javascript:;">
+            <span class="nav-link-text">Contact Us</span>
+            <span class="fa fa-angle-right drop-arrow arrow"></span>
+          </a>
+          <ul>
+            <li routerLinkActive="sub-nav-active" [hidden]="!rolePermission['enquiryAccess'].viewList">
+              <a href="javascript:;" [routerLink]="[URLConstants.INQUIRY]">Inquiry</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li> -->
+    <!-- Master Management -->
+    <!-- <li class="nav-item parent"
+      [hidden]="!rolePermission['charityAccess'].viewList && !rolePermission['causeAccess'].viewList">
+      <a class="nav-link" href="javascript:;">
+        <span class="nav-link-icon fa fa-globe" aria-hidden="true"></span>
+        <span class="nav-link-text">Master Management</span>
+        <span class="fa fa-angle-right drop-arrow arrow"></span>
+      </a>
+      <ul>
+        <li routerLinkActive="sub-nav-active" [hidden]="!rolePermission['charityAccess'].viewList">
+          <a [routerLink]="[URLConstants.CHARITY]" href="javascript:;">Charity</a>
+        </li>
+        <li routerLinkActive="sub-nav-active" [hidden]="!rolePermission['causeAccess'].viewList">
+          <a [routerLink]="[URLConstants.CAUSES]" href="javascript:;">Causes</a>
+        </li>
+      </ul>
+    </li> -->
+    <!-- Transactions -->
+    <!-- [hidden]="!rolePermission['transactionsAccess'].viewList" -->
+    <li routerLinkActive='active' class="nav-item">
+      <!-- [hidden]="!accessPermission.rolesAccess.viewList" -->
+      <a class="nav-link" [routerLink]="[URLConstants.TRANSACTIONS]">
+        <span class="nav-link-icon fa fa-money"></span>
+        <span class="nav-link-text">Transactions</span>
+      </a>
+    </li>
+
+    <!-- Emails Management -->
+    <!-- [hidden]="!rolePermission['emailTemplateAccess'].viewList && !rolePermission['emailSettingsAccess'].viewList" -->
+    <li class="nav-item parent">
+      <a class="nav-link" href="javascript:;">
+        <span class="nav-link-icon fa fa-envelope-o" aria-hidden="true"></span>
+        <span class="nav-link-text">Email Management</span>
+        <span class="fa fa-angle-right drop-arrow arrow"></span>
+      </a>
+      <ul>
+        <!-- [hidden]="!rolePermission.emailTemplateAccess.viewList ||!rolePermission.emailSettingsAccess.viewList " -->
+        <!-- [hidden]="!rolePermission['emailSettingsAccess'].viewList" -->
+        <li routerLinkActive="sub-nav-active">
+          <!-- *ngIf="accessPermission.emailSettingsAccess.viewList" -->
+          <a [routerLink]="[URLConstants.ADMIN_EMAIL]" href="javascript:;">Admin Emails</a>
+        </li>
+        <!-- [hidden]="!rolePermission['emailTemplateAccess'].viewList" -->
+        <li routerLinkActive="sub-nav-active">
+          <!-- *ngIf="accessPermission.emailTemplateAccess.viewList" -->
+          <a [routerLink]="[URLConstants.EMAIL_TEMPLATE_list]" href="javascript:;">Email templates</a>
+        </li>
+        <li routerLinkActive="sub-nav-active" *ngIf="getToken('role') === 'Super Admin'">
+          <a [routerLink]="[URLConstants.SMTP_SETTING]" href="javascript:;">Smtp setting</a>
+        </li>
+      </ul>
+    </li>
+    <!-- Manage Roles -->
+    <!-- [hidden]="!rolePermission.rolesAccess.viewList" -->
+    <li routerLinkActive='active' class="nav-item">
+      <!-- [hidden]="!accessPermission.rolesAccess.viewList" -->
+      <a class="nav-link" href="javascript:;" [routerLink]="[URLConstants.MANAGE_ROLES]">
+        <span class="nav-link-icon fa fa-sliders"></span>
+        <span class="nav-link-text">Manage Roles</span>
+      </a>
+    </li>
+
+    <!-- Settings -->
+    <li class="nav-item parent">
+      <a class="nav-link" href="javascript:;" [hidden]="getToken('role') !== 'Super Admin'">
+        <span class=" nav-link-icon fa fa-cog" aria-hidden="true"></span>
+        <span class="nav-link-text">Settings</span>
+        <span class="fa fa-angle-right drop-arrow arrow"></span>
+      </a>
+      <ul>
+        <li routerLinkActive="sub-nav-active">
+          <a href="javascript:;" [routerLink]="[URLConstants.GLOBAL_SETTINGS]">Email settings</a>
+        </li>
+        <li routerLinkActive="sub-nav-active">
+          <a href="javascript:;" [routerLink]="[URLConstants.PAYMENT_GATEWAY]">
+            Credentails </a>
+        </li>
+        <li routerLinkActive="sub-nav-active">
+          <a href="javascript:;" [routerLink]="[URLConstants.CHARITIES_COMMON_CONTENT]">Charities common content</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>

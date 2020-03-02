@@ -1,0 +1,34 @@
+<header class="header">
+  <div class="header-stack">
+    <div class="header-right">
+      <a id="sideMenuToggle" href="javascript:;" class="d-block" (click)="sidepanelOnOff()"><span
+          class="fa fa-navicon"></span></a>
+      <div class="header-menu"></div>
+      <div class="header-topbar">
+        <ul class="topbar-nav">
+          <li class="profile-dropdown">
+            <a class="dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
+              <span class="user-info">
+                <span class="user-name">
+                  {{firstname}}
+                </span>
+              </span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right p-0 profile-menu" aria-labelledby="profileDropdown">
+              <a class="dropdown-item" href="javascript:;" [routerLink]="[URLConstants.MY_PROFILE]">
+                <span class="fa fa-user"></span> <span>My Profile</span>
+              </a>
+              <a class="dropdown-item" href="javascript:;" [routerLink]="[URLConstants.CHANGE_PASS]">
+                <span class="fa fa-cog"></span><span>Change Password</span>
+              </a>
+              <div class="dropdown-divider mt-2 mb-0"></div>
+              <a class="dropdown-item logout" href="javascript:;" (click)='logout()'>
+                <span class="fa fa-power-off"></span><span>Logout</span>
+              </a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</header>

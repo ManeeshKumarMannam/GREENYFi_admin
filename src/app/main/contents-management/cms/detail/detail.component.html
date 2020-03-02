@@ -1,0 +1,134 @@
+<!-- BEGIN: Sub Header  -->
+<app-sub-header [subHeaderData]="subHeaderData"></app-sub-header>
+<!-- END: Sub Header  -->
+
+<div class="content-wrapper">
+  <!-- cms Form Stars -->
+  <form #form="ngForm" (ngSubmit)="submitCmsForm(form, cms)" autocomplete="off">
+    <div class="card animated fadeIn">
+      <div class="card-header text-left">
+        <div class="card-title">Meta Data</div>
+      </div>
+      <div class="card-body">
+        <div class="container-fluid">
+          <div class="form-group row">
+            <div class="col-lg-2 col-sm-3">
+              <!-- Meta Title starts-->
+              <label class="col-form-label">Meta Title * :</label>
+            </div>
+            <div class="col-xl-10 co-lg-12"
+              [ngClass]="((submitted || metaTitle.touched) && metaTitle.invalid)?'has-danger':''">
+              <div class="form-group">
+                <input type="text" class="form-control" name="metaTitle" placeholder="Enter Meta Title"
+                  #metaTitle="ngModel" [(ngModel)]="cms.metaTitle" maxlength="70" required>
+                <span class="notes" [hidden]="((submitted || metaTitle.touched) && metaTitle.invalid)">
+                  Maximum 70 Character is suitable
+                </span>
+                <div class="error-block text-left" *ngIf="((submitted || metaTitle.touched) && metaTitle.invalid)">
+                  {{showError('metaTitle', metaTitle.errors)}}
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Meta Title Ends-->
+
+          <!-- Meta Description starts -->
+          <div class="form-group row">
+            <div class="col-lg-2 col-sm-3">
+              <label class="col-form-label">Meta Description * :</label>
+            </div>
+            <div class="col-xl-10 co-lg-12"
+              [ngClass]="((submitted || metaDescription.touched) && metaDescription.invalid)?'has-danger':''">
+              <div class="form-group">
+                <textarea name="metaDescription" class="form-control" placeholder="Enter Meta Description" rows="5"
+                  #metaDescription="ngModel" [(ngModel)]="cms.metaDescription" maxlength="130" required></textarea>
+                <span class="notes" [hidden]="((submitted || metaDescription.touched) && metaDescription.invalid)">
+                  Maximum 10 Words are suitable
+                </span>
+                <div class="error-block text-left"
+                  *ngIf="((submitted || metaDescription.touched) && metaDescription.invalid)">
+                  {{showError('metaDescription', metaDescription.errors)}}
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Meta Description Ends -->
+
+          <!-- Meta Keyword starts -->
+          <div class="form-group row">
+            <div class="col-lg-2 col-sm-3">
+              <label class="col-form-label">Meta Keyword * :</label>
+            </div>
+            <div class="col-xl-10 co-lg-12"
+              [ngClass]="((submitted || metaKeyword.touched) && metaKeyword.invalid)?'has-danger':''">
+              <div class="form-group">
+                <textarea name="metaKeyword" class="form-control" placeholder="Enter Meta Description" rows="5"
+                  #metaKeyword="ngModel" [(ngModel)]="cms.metaKeyword" maxlength="156" required></textarea>
+                <span class="notes" [hidden]="((submitted || metaKeyword.touched) && metaKeyword.invalid)">
+                  Maximum 156 Character is suitable
+                </span>
+                <div class="error-block text-left" *ngIf="((submitted || metaKeyword.touched) && metaKeyword.invalid)">
+                  {{showError('metaKeyword', metaKeyword.errors)}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Meta Keyword Ends -->
+
+
+    <div class="card animated fadeIn">
+      <div class="card-header text-left">
+        <h5 class="card-title">Page Detail</h5>
+      </div>
+      <div class="card-body">
+        <div class="container-fluid">
+          <div class="form-group row">
+            <div class="col-lg-2 col-sm-3">
+              <!-- Page Title starts -->
+              <label class="col-form-label">Page Title * :</label>
+            </div>
+            <div class="col-xl-10 co-lg-12"
+              [ngClass]="((submitted || pageTitle.touched) && pageTitle.invalid)?'has-danger':''">
+              <div class="form-group">
+                <input type="text" class="form-control" name="pageTitle" placeholder="Enter Page Name"
+                  #pageTitle="ngModel" [(ngModel)]="cms.pageTitle" required>
+                <div class="error-block text-left" *ngIf="((submitted || pageTitle.touched) && pageTitle.invalid)">
+                  {{showError('pageTitle', pageTitle.errors)}}
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Page Title Ends -->
+
+          <!-- Description starts -->
+          <div class="form-group row">
+            <div class="col-lg-2 col-sm-3">
+              <label class="col-form-label">Description * :</label>
+            </div>
+            <div class="col-xl-10 co-lg-12">
+              <div class="form-group">
+                <!-- BEGIN: Grapesjs Editor -->
+                <app-grapes-js [emailTemplate]="grapesJsData" [type]="type" [grapesjsId]="gjs"></app-grapes-js>
+                <!-- END: Grapesjs Editor -->
+              </div>
+            </div>
+          </div>
+          <!-- Description Ends -->
+          <hr />
+          <!-- Save and Cancel Button starts -->
+          <div class="form-group">
+            <div class="button-group-container float-right">
+              <button type="submit" class="btn btn-primary mr-2">Save</button>
+              <button type="button" class="btn btn-outline-primary" [routerLink]="[URLConstants.CMS]">Cancel</button>
+            </div>
+          </div>
+          <!-- Save and Cancel Button Ends -->
+        </div>
+      </div>
+    </div>
+  </form>
+  <!-- cms Form Ends -->
+</div>

@@ -1,0 +1,35 @@
+<!-- BEGIN: Sub Header  -->
+<app-sub-header [subHeaderData]="subHeaderData"></app-sub-header>
+<!-- END: Sub Header  -->
+
+<div class="content-wrapper">
+  <div class="card animated fadeIn">
+    <div class="card-body">
+      <!-- CommonContentForm Starts -->
+      <form #commonContent="ngForm" (ngSubmit)="submitCommonContentForm(commonContent,content)" class="form-group">
+        <!-- CommonContent -->
+        <div class="form-group row">
+          <div class="col-lg-2 col-sm-3">
+            <label class="col-form-label">Common Description:</label>
+          </div>
+          <div class="col-md-8 co-sm-7">
+            <!-- <textarea type="text" rows="5" cols="5" class="form-control" placeholder="Enter Common Description "
+            name="commonDescription" #commonDescription="ngModel" [(ngModel)]="content.commonDescription"></textarea> -->
+            <app-grapes-js [emailTemplate]="grapesJsDataCommon" [type]="typeCommon" [grapesjsId]="gjsCommon"
+              *ngIf="grape">
+            </app-grapes-js>
+          </div>
+        </div>
+        <!-- CommonContent Ends -->
+        <div class="card-footer form-group">
+          <div class="button-group-container float-right">
+            <button type="button" class="btn btn-outline-primary" (click)="getContentDetails('cancel')">Cancel</button>
+          </div>
+          <div class="button-group-container float-right">
+            <button type="submit" class="btn btn-primary">Save</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

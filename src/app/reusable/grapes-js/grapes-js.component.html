@@ -1,0 +1,9 @@
+<ng-select id="dynamic" [hidden]="showRichTextEditor?false:true" [items]="fieldList" placeholder="Select"
+  [clearable]='false' [searchable]='false' [dropdownPosition]="'auto'" (change)="showValue($event)" required>
+</ng-select>
+<div class="row">
+  <div class="col-md-12">
+    <div [id]="grapesjsId">
+    </div>
+  </div>
+</div>

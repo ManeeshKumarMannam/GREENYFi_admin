@@ -1,0 +1,78 @@
+$body-bg:#fafafa;
+$font-global: 'Poppins', sans-serif;
+$font-size-base: 14px;
+$font-heading: 'Ubuntu', sans-serif;
+$font-light: 300;
+$font-regular:400;
+$font-medium:500;
+$font-semibold: 600;
+$font-bold: 700;
+$line-height-base: 1.429rem;
+/*Color*/
+$color-body:#6a707e;
+$color-primary:#ec7e0a;
+$color-green:#10bc5e;
+$color-secondary:#dcdbec;
+$color-success:#71D975;
+$color-warning:#f8e9db;
+$color-danger:#F16261;
+$color-info:#1AADE2;
+$color-gray:#686e7c;
+$color-light-gray:#abafb3;
+$color-white: #fff;
+$color-disabled:#C8D1D1;
+$color-red: red;
+/*Gradiant Style*/
+$fallback:#ec7e0a;
+$from:#ec7e0a;
+$to:#4FE8F3;
+$direction:90deg;
+/*Background color Style*/
+$bg-dark:#1e2129;
+$bg-blue-dark:#657d8d;
+$bg-light-dark:#e5e5e5;
+$bg-primary:#ec7e0a;
+$bg-primary-lite:#fdf2e5;
+$bg-secondary:#dcdbec;
+$bg-success:#21B683;
+$bg-warning:#f8e9db;
+$bg-danger:#F16261;
+$bg-info:#1AADE2;
+$bg-gray:#aaaaaa;
+$bg-white: #fff;
+$bg-light:#f9f5f3;
+$bg-light-orange: #FFF8F2;
+/*Border color Style*/
+$border-primary:#ec7e0a;
+$border-secondary:#dcdbec;
+$border-success:#21B683;
+$border-warning:#f8e9db;
+$border-danger:#F16261;
+$border-info:#1AADE2;
+$border-white: #fff;
+$border-disabled:#dcdbec;
+$border-color:#EBEDF2;
+/*Button color Style*/
+$btn-primary:#ec7e0a;
+$btn-secondary:#dcdbec;
+$btn-success:#21B683;
+$btn-warning:#f8e9db;
+$btn-danger:#F16261;
+$btn-default: #fff;
+$btn-info:#1AADE2;
+$padding-y:0.75rem;
+$padding-x:7.14rem;
+$margin-y:0.75rem;
+$box-shadow:none;
+$link-color:#4293b2;
+/*Form*/
+$input-border-color:#EBEDF2;
+$input-btn-border-width:0.0625rem;
+$input-color-placeholder:#72777f;
+$input-padding-y:.625rem;
+$input-padding-x:.9rem;
+$check-radio-border:#BDC3D5;
+$dropdown-hover:#f7f8fa;
+$modal-error:#fdefef;
+$modal-success:#e8f7f2;
+$border-radius:2px;

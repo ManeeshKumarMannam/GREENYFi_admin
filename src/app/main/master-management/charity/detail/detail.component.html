@@ -1,0 +1,236 @@
+<!-- BEGIN: Sub Header  -->
+<app-sub-header [subHeaderData]="subHeaderData"></app-sub-header>
+<!-- END: Sub Header  -->
+<div class="content-wrapper">
+  <div class="card animated fadeIn">
+
+    <!-- Charity Form starts -->
+    <form #charityForm="ngForm" (ngSubmit)="submitCharityForm(charityForm, charity)" class="form-group"
+      autocomplete="off">
+      <div class="card-body">
+        <div class="row justify-content-center  form-group">
+          <div class="form-group">
+            <div class="user-profile-img">
+              <img *ngIf="!displayCharityImage.length" src='assets/images/noImageAvailable.png' alt="no img">
+              <div class="inner-image" *ngFor="let item of displayCharityImage">
+                <img [src]="item?imagePath+item:'assets/images/noImageAvailable.png'" alt="no img">
+              </div>
+              <div class="upload-file">
+                <label>
+                  <input class='file-input' style="display: none" type="file" name="photo" accept="image/*"
+                    (change)="fileChangeEvent($event)" id="profile">
+                </label>
+                <a href="javascript:;" (click)="openfile($event)"><em class="fa fa-camera camera"
+                    aria-hidden="true"></em></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Charity Form Ends -->
+
+
+        <!-- txnId  starts-->
+        <div class="row form-group">
+          <div class="col-lg-2 col-sm-3">
+            <label class="col-form-label">TAX Id *:</label>
+          </div>
+          <div class="col-xl-10 co-lg-10" [ngClass]="((submitted || txnId.touched) && txnId.invalid)?'has-danger':''">
+            <input type="text" class="form-control" name="txnId" placeholder="Enter Transaction Id " #txnId="ngModel"
+            pattern="^\d{2}\-\d+$" [(ngModel)]="charity.txnId" required>
+            <div class="error-block text-left" *ngIf="((submitted || txnId.touched) && txnId.invalid)">
+              {{showError('txnId', txnId.errors)}}
+            </div>
+          </div>
+        </div>
+        <!-- (keydown)="AllowNumbers($event)" -->
+        <!-- txnId  Ends-->
+
+
+
+        <!-- Name Starts-->
+        <div class="row form-group">
+          <div class="col-lg-2 col-sm-3">
+            <label class="col-form-label">Name *:</label>
+          </div>
+          <div class="col-xl-10 co-lg-10" [ngClass]="((submitted || name.touched) && name.invalid)?'has-danger':''">
+            <input type="text" class="form-control" name="name" placeholder="Enter Name " #name="ngModel"
+              [(ngModel)]="charity.name" required>
+            <div class="error-block text-left" *ngIf="((submitted || name.touched) && name.invalid)">
+              {{showError('name', name.errors)}}
+            </div>
+          </div>
+        </div>
+        <!-- Name Ends-->
+
+        <!-- Description starts -->
+        <div class="form-group row">
+          <div class="col-lg-2 col-sm-3">
+            <label class="col-form-label">Sub Description * :</label>
+          </div>
+          <div class="col-xl-10 co-lg-10">
+            <div class="form-group"
+              [ngClass]="((submitted || subDescription.touched) && subDescription.invalid)?'has-danger':''">
+              <textarea type="text" rows="5" cols="5" class="form-control" maxlength="180" name="subDescription"
+                placeholder="Enter Sub Description " #subDescription="ngModel" [(ngModel)]="charity.subDescription"
+                required></textarea>
+              <div style="font-size: 13px">Hint : Sub description should contain maximum 180 characters only</div>
+
+              <div class="error-block text-left"
+                *ngIf="((submitted || subDescription.touched || subDescription.dirty) && subDescription.invalid)">
+                {{showError('subDescription', subDescription.errors)}}
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Description Ends -->
+
+        <!-- Description starts -->
+        <div class="form-group row">
+          <div class="col-lg-2 col-sm-3">
+            <label class="col-form-label">Description :</label>
+          </div>
+          <div class="col-xl-10 co-lg-10">
+            <div class="form-group">
+              <!-- BEGIN: Grapesjs Editor -->
+              <app-grapes-js [emailTemplate]="grapesJsData" [type]="type" [grapesjsId]="gjs"></app-grapes-js>
+              <!-- END: Grapesjs Editor -->
+            </div>
+          </div>
+        </div>
+        <!-- Description Ends -->
+
+
+
+
+        <!-- Score starts-->
+        <div class="row form-group">
+          <div class="col-lg-2 col-sm-3">
+            <label class="col-form-label">webSite :</label>
+          </div>
+          <!-- "(http[s]?:\/\/)?[^\s(['<,>]*\.[^\s[',><]*"  -->
+          <!-- [ngClass]="((submitted || score.touched) && score.invalid)?'has-danger':''" -->
+          <div class="col-xl-10 co-lg-10">
+            <input type="text" class="form-control" pattern="^https?://?[^\s(['<,>]*\.[^\s[',><]*" name="webSite"
+              placeholder="Enter webSite (http://www.domain.com) " #webSite="ngModel" [(ngModel)]="charity.webSite">
+            <div class="error-block text-left"
+              *ngIf="((submitted || webSite.touched||webSite.dirty) && webSite.invalid)">
+              {{showError('webSite', webSite.errors)}}
+            </div>
+          </div>
+        </div>
+        <!-- Score Ends-->
+
+        <!-- causes Starts-->
+        <div class="row form-group">
+          <div class="col-lg-2 col-sm-3">
+            <label class="col-form-label">causes :</label>
+          </div>
+          <!-- [ngClass]="((submitted || ratingValue.touched) && ratingValue.invalid)?'has-danger':''" -->
+          <div class="col-xl-10 co-lg-10">
+            <ng-select class="ng-select-line" [items]="causesArray" bindLabel="name" bindValue="_id" name="ratingValue"
+              placeholder="Select Causes" [clearable]='false' [searchable]='true' autocomplete="false" multiple="true"
+              [dropdownPosition]="'auto'" name="role" #ratingValue="ngModel" [(ngModel)]="charity.ratingValue" required>
+            </ng-select>
+            <!-- <div class="error-block text-left" *ngIf="((submitted || ratingValue.touched) && ratingValue.invalid)">
+              {{showError('ratingValue', ratingValue.errors)}}
+            </div> -->
+          </div>
+        </div>
+
+         <!-- overallsize Starts-->
+         <div class="row form-group">
+          <div class="col-lg-2 col-sm-3">
+            <label class="col-form-label">Overall size (Contributions) :</label>
+          </div>
+          <div class="col-xl-10 co-lg-10">
+            <input type="text" class="form-control" name="overallSize"
+            placeholder="Enter Overall Size" #overallSize="ngModel" [(ngModel)]="charity.overallSize">
+          </div>
+        </div>
+
+        <!-- Rating starts-->
+        <div *ngFor="let i of ratingArray; index as index;first as first">
+          <!-- <i class="fa fa-close" (click)="removeRating(index)" *ngIf="!first"></i> -->
+
+          <div class="row form-group">
+            <div class="col-lg-2 col-sm-3">
+              <label class="col-form-label">Rating :</label>
+
+            </div>
+            <!-- [ngClass]="((submitted || rating.touched) && rating.invalid)?'has-danger':''" -->
+            <div class="col-xl-10 co-lg-10">
+              <ng-select class="ng-select-line" [items]="ratingValues" bindLabel="name" bindValue="name"
+                name="rating{{index}}" placeholder="Enter Rating" [clearable]='true' [searchable]='true'
+                autocomplete="false" [dropdownPosition]="'auto'" #ratingValue="ngModel"
+                [(ngModel)]="i.rating" required>
+              </ng-select>
+              <!-- <input type="text" class="form-control" (keydown)="AllowNumbers($event)" name="rating{{index}}"
+                placeholder="Enter Rating " #rating="ngModel" [(ngModel)]="i.rating" required> -->
+              <!-- <div class="error-block text-left" *ngIf="((submitted || rating.touched) && rating.invalid)">
+                {{showError('rating', rating.errors)}}
+              </div> -->
+            </div>
+          </div>
+          <!-- Rating Ends-->
+
+
+          <!-- Rating Name Starts-->
+          <div class="row form-group">
+            <div class="col-lg-2 col-sm-3">
+              <label class="col-form-label">Rating Name :</label>
+            </div>
+            <!-- [ngClass]="((submitted || ratingName.touched) && ratingName.invalid)?'has-danger':''" -->
+            <div class="col-xl-10 co-lg-10">
+              <ng-select class="ng-select-line" [items]="ratingNames" bindLabel="name" bindValue="name"
+                name="name{{index}}" placeholder="Enter Rating Name" [clearable]='true' [searchable]='true'
+                autocomplete="false" [dropdownPosition]="'auto'" #ratingName="ngModel"
+                [(ngModel)]="i.name" required>
+              </ng-select>
+              <!-- <input type="text" class="form-control" name="name{{index}}" placeholder="Enter Rating Name "
+                #ratingName="ngModel" [(ngModel)]="i.name" required> -->
+              <!-- <div class="error-block text-left" *ngIf="((submitted || ratingName.touched) && ratingName.invalid)">
+                {{showError('ratingName', ratingName.errors)}}
+              </div> -->
+            </div>
+          </div>
+          <!-- Rating Name Ends-->
+
+
+          <!-- Score starts-->
+          <div class="row form-group">
+            <div class="col-lg-2 col-sm-3">
+              <label class="col-form-label">Score :</label>
+            </div>
+            <!-- [ngClass]="((submitted || score.touched) && score.invalid)?'has-danger':''" -->
+            <div class="col-xl-10 co-lg-10">
+              <input type="text" class="form-control" name="score{{index}}" pattern="^\d*\.?\d{1,2}?$"
+                placeholder="Enter Score " #score="ngModel" [(ngModel)]="i.score" (input)="validateScore(i.score,index)">
+              <div class="error-block text-left" *ngIf="((score.touched && score.invalid) || scoreError[index])">
+                {{showError('score', score.errors)}}
+              </div>
+            </div>
+          </div>
+          <!-- Score Ends-->
+
+          <hr />
+        </div>
+      </div>
+      <!-- causes Ends-->
+      <!-- Add Rating Starts -->
+      <button type="button" class="btn btn-primary" [hidden]="ratingArray.length>=3" (click)="addRating()">Add
+        Rating</button>
+      <!-- Add Rating Ends -->
+
+      <!-- Submit and Cancel butto starts -->
+      <div class="card-footer form-group">
+        <div class="button-group-container text-right ">
+          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="button" class="btn btn-outline-primary" [routerLink]="[URLConstants.CHARITY]">Cancel</button>
+        </div>
+      </div>
+      <!-- Submit and Cancel butto Ends -->
+    </form>
+    <!-- Charity Form Ends -->
+  </div>
+</div>

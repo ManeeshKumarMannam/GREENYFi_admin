@@ -1,0 +1,195 @@
+<!-- BEGIN: Sub Header  -->
+<app-sub-header [subHeaderData]="subHeaderData"></app-sub-header>
+<!-- END: Sub Header  -->
+<!-- <div>
+  <img src="assets/images/comingSoon.jpg" alt="no img" width="200px" height="200px">
+</div> -->
+<div class="content-wrapper">
+  <div class="card animated fadeIn">
+    <div class="card-body">
+      <!-- smtp Form Starts -->
+      <form #aboutUsForm="ngForm" (ngSubmit)="SubmitAboutForm(aboutUsForm, aboutus)" autocomplete="off">
+        <!-- Title Starts -->
+        <div class="form-group row">
+          <div class="col-lg-2 col-sm-3">
+            <label class="col-form-label">Title:</label>
+          </div>
+          <div class="col-xl-10 co-lg-10" [ngClass]="((submitted || title.touched) && title.invalid)?'has-danger':''">
+            <input type="text" class="form-control" placeholder="Enter Tiltle" name="host" #title="ngModel"
+              [(ngModel)]="aboutus.title" required>
+            <div class="error-block text-left" *ngIf="((submitted || title.touched) && title.invalid)">
+              {{showError('title', title.errors)}}
+            </div>
+          </div>
+        </div>
+        <!-- Title Ends -->
+
+        <!-- Title Description starts grapejs -->
+        <div class="form-group row">
+          <div class="col-lg-2 col-sm-3">
+            <label class="col-form-label">Title Description:</label>
+          </div>
+          <div class="col-xl-10 co-lg-10">
+            <div class="form-group">
+              <!-- BEGIN: Grapesjs Editor -->
+              <app-grapes-js [emailTemplate]="grapesJsData1" [type]="type" [grapesjsId]="gjs1" *ngIf="grape">
+              </app-grapes-js>
+              <!-- <app-grapes-js [emailTemplate]="grapesJsData1" [type]="type" [grapesjsId]='gjs1'></app-grapes-js> -->
+              <!-- END: Grapesjs Editor -->
+            </div>
+          </div>
+        </div>
+        <!-- Title Description Ends -->
+
+        <!-- Our Name starts -->
+        <div class="form-group row">
+          <div class="col-lg-2 col-sm-3">
+            <label class="col-form-label">Our Name:</label>
+          </div>
+          <div class="col-xl-10 co-lg-10">
+            <input type="text" class="form-control" placeholder="Enter Our Name" name="ourName" #ourName="ngModel"
+              [(ngModel)]="aboutus.ourName" required>
+          </div>
+        </div>
+        <!-- Our Name Ends -->
+
+        <!-- Our Name Description starts grapejs-->
+        <div class="form-group row">
+          <div class="col-lg-2 col-sm-3">
+            <label class="col-form-label">Our Name Description:</label>
+          </div>
+          <div class="col-xl-10 co-lg-10">
+            <app-grapes-js [emailTemplate]="grapesJsData2" [type]="type2" [grapesjsId]="gjs2" *ngIf="grape">
+            </app-grapes-js>
+            <!-- <app-grapes-js [emailTemplate]="grapesJsData2" [type]="type" [grapesjsId]='gjs2'></app-grapes-js> -->
+          </div>
+        </div>
+        <!-- Our Name Description  Ends -->
+
+
+        <!-- why We Matter starts grapejs-->
+        <div class="form-group row">
+          <div class="col-lg-2 col-sm-3">
+            <label class="col-form-label">why We Matter:</label>
+          </div>
+          <div class="col-xl-10 co-lg-10">
+            <input type="text" class="form-control" placeholder="Enter why We Matter" name="whyWeMatter"
+              #whyWeMatter="ngModel" [(ngModel)]="aboutus.whyWeMatter" required>
+          </div>
+        </div>
+        <!-- why WeM atterDescription  Ends -->
+
+        <!-- why We Matter Description starts grapejs-->
+        <div class="form-group row">
+          <div class="col-lg-2 col-sm-3">
+            <label class="col-form-label">why We Matter Descrption:</label>
+          </div>
+          <div class="col-xl-10 co-lg-10">
+            <app-grapes-js [emailTemplate]="grapesJsData3" [type]="type3" [grapesjsId]="gjs3" *ngIf="grape">
+            </app-grapes-js>
+
+          </div>
+        </div>
+        <!-- why We MatterDescription  Description  Ends -->
+
+
+        <!--mee tboard Title starts grapejs-->
+        <div class="form-group row">
+          <div class="col-lg-2 col-sm-3">
+            <label class="col-form-label">Meet Board Title:</label>
+          </div>
+          <div class="col-xl-10 co-lg-10">
+
+            <input type="text" class="form-control" placeholder="Enter Meet BoardTitle" name="meetboardTitle"
+              #meetboardTitle="ngModel" [(ngModel)]="aboutus.meetboardTitle" required>
+
+          </div>
+        </div>
+        <!-- meet board Title Ends -->
+
+
+
+        <!--member One Image-->
+        <div *ngFor="let i of memeberArray; index as index;first as first">
+          <div class="row justify-content-center  form-group">
+            <div class="form-group">
+              <div class="user-profile-img">
+                <div class="inner-image">
+                  <img [src]="i.image?imagePath+i.image:'assets/images/noImageAvailable.png'" alt="no img">
+                </div>
+                <div class="upload-file">
+                  <label>
+                    <input class='file-input' type="file" name="profile{{index}}" accept="image/png,image/svg" multiple
+                      (change)="fileChangeEvent($event,'memberOneImage',index)" id="firstImage">
+                  </label>
+                  <a href="javascript:;" (click)="openFile($event,'memberOneImage',index)"><em
+                      class="fa fa-camera camera" aria-hidden="true"></em></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- meet board Title Ends -->
+
+          <!--member OneName -->
+          <div class="form-group row">
+            <div class="col-lg-2 col-sm-3">
+              <label class="col-form-label">Name:</label>
+            </div>
+            <div class="col-xl-10 co-lg-10">
+              <input type="text" class="form-control" placeholder="EnterName " name="name{{index}}" #name="ngModel"
+                [(ngModel)]="i.name" required>
+            </div>
+          </div>
+          <!-- member OneName Ends -->
+
+          <!--member OneDesignation -->
+          <div class="form-group row">
+            <div class="col-lg-2 col-sm-3">
+              <label class="col-form-label">Designation:</label>
+            </div>
+            <div class="col-xl-10 co-lg-10">
+              <input type="text" class="form-control" placeholder="Enter  Designation " name="designation{{index}}"
+                #designation="ngModel" [(ngModel)]="i.designation" required>
+            </div>
+          </div>
+          <!-- member OneDesignation Ends -->
+
+
+          <!--member memberOneDescription -->
+          <div class="form-group row">
+            <div class="col-lg-2 col-sm-3">
+              <label class="col-form-label"> Description:</label>
+            </div>
+            <div class="col-xl-10 co-lg-10">
+              <app-grapes-js [emailTemplate]="grapesJsData4+index" [type]="'type4'+index" [grapesjsId]="'gjs4'+index"
+                *ngIf="grape">
+              </app-grapes-js>
+
+              <!-- <textarea type="text" rows="5" cols="5" class="form-control" placeholder="Enter  Description "
+                name="description{{index}}" #description="ngModel" [(ngModel)]="i.description" required></textarea> -->
+            </div>
+          </div>
+          <!-- member memberOneDescription Ends -->
+
+
+
+          <hr />
+
+        </div>
+        <button type="button" class="btn btn-primary" [hidden]="memeberArray.length>=3" (click)="MemberDtails()">Add
+          Forms</button>
+        <!-- Save Button -->
+        <div class=" form-group">
+          <div class="button-group-container float-right">
+            <button type="button" class="btn btn-outline-primary" (click)="getAboutUsetails('cancel')">Cancel</button>
+          </div>
+          <div class="button-group-container float-right">
+            <button type="submit" class="btn btn-primary mr-3">Save</button>
+          </div>
+        </div>
+
+      </form>
+      <!-- smtp Form Ends -->
+    </div>
+  </div>
+</div>

@@ -1,0 +1,66 @@
+<!-- BEGIN: Sub Header  -->
+<app-sub-header [subHeaderData]="subHeaderData"></app-sub-header>
+<!-- END: Sub Header  -->
+
+<div class="content-wrapper">
+
+    <div class="row col-md-12">
+        <div class="col-md-6">
+            <div class="card animated fadeInUp">
+                <div class="text-center mt-2">
+                    <label class="form-label" style="font-size: 1.25em; line-height: 1.3;">
+                        <h3>Users</h3>
+                    </label>
+                </div>
+                <div class="row mt-2 ">
+                    <div class="col-6 text-center">
+                        <h5>Register Users</h5>
+                        <h6 class="text-success">Count : {{dashBoardDetails.usersCount}}</h6>
+                    </div>
+                    <div class="col-6 text-center">
+                        <h5>Volunteers</h5>
+                        <h6 class="text-success">Count : {{dashBoardDetails.guestVolunteersCount}}</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card animated fadeInUp">
+                <div class="text-center mt-2">
+                    <h3>Donations</h3>
+                    <h6 class="text-success">Total Amount : {{dashBoardDetails.totalAmount}}</h6>
+                </div>
+                <div class="m-0 mt-2 row">
+                    <div class="col-6 text-center">
+                        <h5>For Cleaning & Planting Activities</h5>
+                        <h6 class="text-success">Amount : {{dashBoardDetails.totalAmountforPlanting}}</h6>
+                    </div>
+                    <div class="col-6 text-center">
+                        <h5>For Animal Care & Wellfare</h5>
+                        <h6 class="text-success">Amount : {{dashBoardDetails.totalAmountforGuestUsers}}</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="text-center mt-2">
+                    <label class="form-label" style="font-size: 1.25em; line-height: 1.3">
+                        <h3>Events / Issues Registered</h3>
+                    </label>
+                </div>
+                <div class="row mt-2 ">
+                    <div class="col-6 text-center">
+                        <h5>Issues</h5>
+                        <h6 class="text-success">Registered Issues Count: {{dashBoardDetails.issuesCount}}</h6>
+                    </div>
+                    <div class="col-6 text-center">
+                        <h5>Events</h5>
+                        <h6 class="text-info">Registered Events Count : {{dashBoardDetails.registeredEventsCount}}</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- </div> -->
+</div>

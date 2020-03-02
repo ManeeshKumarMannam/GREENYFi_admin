@@ -1,0 +1,227 @@
+<!-- BEGIN: Sub Header  -->
+<app-sub-header [subHeaderData]="subHeaderData"></app-sub-header>
+<!-- END: Sub Header  -->
+
+
+
+<div class="content-wrapper">
+  <div class="card animated fadeIn">
+
+    <form #paymentForm="ngForm" (ngSubmit)="submitpaymentForm(paymentForm, stripeDetails)" class="form-group">
+      <!-- PaymentForm Starts -->
+      <div class="card-header text-left">
+        <div class="card-title">Payment Details</div>
+      </div>
+      <div class="card-body">
+        <div class="container-fluid">
+          <!-- Stripe Sandbox Starts-->
+          <div class="card animated fadeIn">
+            <div class="card-header text-left">
+              <div class="card-title">Stripe Sandbox</div>
+            </div>
+            <div class="card-body">
+              <div class="container-fluid">
+                <!-- Stripe Publishable Key Sandbox Starts-->
+                <div class="form-group row">
+                  <div class="col-lg-2 col-sm-3">
+                    <label class="col-form-label">Stripe Publishable Key Sandbox :</label>
+                  </div>
+                  <div class="col-md-8 co-sm-7">
+                    <div class="form-group">
+                      <input type="text" class="form-control" name="stripekeysandbox"
+                        placeholder="Enter Stripe Publishable Key Sandbox" #stripekeysandbox="ngModel"
+                        [(ngModel)]="stripeDetails.stripePublishableKeySandBox" maxlength="70">
+                    </div>
+                  </div>
+                </div>
+                <!-- Stripe Publishable Key Sandbox Ends -->
+
+                <!-- Stripe Scret Key Sandbox Starts-->
+                <div class="form-group row">
+                  <div class="col-lg-2 col-sm-3">
+                    <label class="col-form-label">Stripe Scret Key Sandbox :</label>
+                  </div>
+                  <div class="col-md-8 co-sm-7">
+                    <div class="form-group">
+                      <input type="text" class="form-control" name="stripeseckey"
+                        placeholder="Enter Stripe Scret Key Sandbox" #stripeseckey="ngModel"
+                        [(ngModel)]="stripeDetails.stripeScretKeySandbox" maxlength="70">
+                    </div>
+                  </div>
+                </div>
+                <!-- Stripe Scret Key Sandbox Ends-->
+              </div>
+            </div>
+          </div>
+          <!-- Stripe Sandbox Ends-->
+
+          <!-- Stripe Production Starts-->
+          <div class="card animated fadeIn">
+            <div class="card-header text-left">
+              <div class="card-title">Stripe Production</div>
+            </div>
+            <div class="card-body">
+              <div class="container-fluid">
+                <!-- Stripe Publishable Key Production Starts-->
+                <div class="form-group row">
+                  <div class="col-lg-2 col-sm-3">
+                    <label class="col-form-label">Stripe Publishable Key Production :</label>
+                  </div>
+                  <div class="col-md-8 co-sm-7">
+                    <div class="form-group"
+                      [ngClass]="((submitted || stripePublishableKeyProduction.touched) && stripePublishableKeyProduction.invalid)?'has-danger':''">
+                      <input type="text" class="form-control" name="stripePublishableKeyProduction"
+                        placeholder="Enter Stripe Publishable Key Production" #stripePublishableKeyProduction="ngModel"
+                        [(ngModel)]="stripeDetails.stripePublishableKeyProduction" required>
+                      <div class="error-block text-left"
+                        *ngIf="((submitted || stripePublishableKeyProduction.touched) && stripePublishableKeyProduction.invalid)">
+                        {{showError('stripePublishableKeyProduction', stripePublishableKeyProduction.errors)}}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Stripe Publishable Key Production Ends-->
+
+                <!-- Stripe Scret Key Production Starts-->
+                <div class="form-group row">
+                  <div class="col-lg-2 col-sm-3">
+                    <label class="col-form-label">Stripe Scret Key Production :</label>
+                  </div>
+                  <div class="col-md-8 co-sm-7">
+                    <div class="form-group"
+                      [ngClass]="((submitted || stripeScretKeyProduction.touched) && stripeScretKeyProduction.invalid)?'has-danger':''">
+                      <input type="text" class="form-control" name="secretkeyprod"
+                        placeholder="Enter Stripe Scret Key Production" #stripeScretKeyProduction="ngModel"
+                        [(ngModel)]="stripeDetails.stripeScretKeyProduction" required>
+                      <div class="error-block text-left"
+                        *ngIf="((submitted || stripeScretKeyProduction.touched) && stripeScretKeyProduction.invalid)">
+                        {{showError('stripeScretKeyProduction', stripeScretKeyProduction.errors)}}
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Stripe Scret Key Production Ends-->
+                </div>
+              </div>
+            </div>
+            <!-- Stripe Production Ends-->
+
+          </div>
+        </div>
+        <div class="card-footer form-group">
+          <div class="button-group-container float-right">
+            <button type="submit" class="btn btn-primary">Save</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <!-- Payment Ends -->
+
+  <!-- Twilio Starts-->
+  <div class="card animated fadeIn">
+
+    <form #twilioForm="ngForm" (ngSubmit)="submiTwilioFormForm(twilioForm, twilioDetails)" class="form-group">
+      <div class="card-header text-left">
+        <h5 class="card-title">Twilio Details</h5>
+      </div>
+      <div class="card-body">
+        <div class="container-fluid">
+          <!-- Twilio Id Starts -->
+          <!-- <div class="form-group row">
+            <div class="col-lg-2 col-sm-3">
+              <label class="col-form-label">Twilio Id :</label>
+            </div>
+            <div class="col-md-8 co-sm-7">
+              <div class="form-group">
+                <input type="text" class="form-control" name="twilioid" placeholder="Enter Twilio Id"
+                  #twilioid="ngModel"  [(ngModel)]="twilioDetails.twilioId" >
+              </div>
+            </div>
+          </div> -->
+          <!-- Twilio Id Ends -->
+
+          <!-- Twilio Password Starts -->
+          <!-- <div class="form-group row">
+            <div class="col-lg-2 col-sm-3">
+              <label class="col-form-label">Twilio Password :</label>
+            </div>
+            <div class="col-md-8 co-sm-7">
+              <div class="form-group">
+                <input type="text" class="form-control" name="twiliopassword" placeholder="Enter Twilio Password"
+                  #twiliopassword="ngModel"  [(ngModel)]="twilioDetails.twilioPassword" >
+              </div>
+            </div>
+          </div> -->
+          <!-- Twilio Password Ends -->
+          <!-- Twilio Account SId Starts -->
+          <div class="form-group row">
+            <div class="col-lg-2 col-sm-3">
+              <label class="col-form-label">Twilio Account SId :</label>
+            </div>
+            <div class="col-md-8 co-sm-7">
+              <div class="form-group"
+                [ngClass]="((submitted || twilioAccountSId.touched) && twilioAccountSId.invalid)?'has-danger':''">
+                <input type="text" class="form-control" name="twilioAccountSId" placeholder="Enter Twilio Account SId"
+                  #twilioAccountSId="ngModel" [(ngModel)]="twilioDetails.twilioAccountSId" required>
+                <div class="error-block text-left"
+                  *ngIf="((submitted || twilioAccountSId.touched) && twilioAccountSId.invalid)">
+                  {{showError('twilioAccountSId', twilioAccountSId.errors)}}
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Twilio Account SId Ends -->
+
+          <!-- Twilio Auth Token Starts -->
+          <div class="form-group row">
+            <div class="col-lg-2 col-sm-3">
+              <label class="col-form-label">Twilio Auth Token :</label>
+            </div>
+            <div class="col-md-8 co-sm-7">
+              <div class="form-group"
+                [ngClass]="((submitted || twilioAuthToken.touched) && twilioAuthToken.invalid)?'has-danger':''">
+                <input type="text" class="form-control" name="twilioAuthToken" placeholder="Enter Twilio Auth Token"
+                  #twilioAuthToken="ngModel" [(ngModel)]="twilioDetails.twilioAuthToken" required>
+                <div class="error-block text-left"
+                  *ngIf="((submitted || twilioAuthToken.touched) && twilioAuthToken.invalid)">
+                  {{showError('twilioAuthToken', twilioAuthToken.errors)}}
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Twilio Auth Token Ends -->
+
+
+
+          <!-- Twilio Password Starts -->
+          <div class="form-group row">
+            <div class="col-lg-2 col-sm-3">
+              <label class="col-form-label">Twilio Number :</label>
+            </div>
+            <div class="col-md-8 co-sm-7">
+              <div class="form-group"
+                [ngClass]="((submitted || twilioPhNumber.touched) && twilioPhNumber.invalid)?'has-danger':''">
+                <input type="text" class="form-control" name="twilioPhNumber" placeholder="Enter Twilio Number"
+                  #twilioPhNumber="ngModel" [(ngModel)]="twilioDetails.twilioPhNumber" required>
+                <div class="error-block text-left"
+                  *ngIf="((submitted || twilioPhNumber.touched) && twilioPhNumber.invalid)">
+                  {{showError('twilioPhNumber', twilioPhNumber.errors)}}
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Twilio Password Ends -->
+        </div>
+      </div>
+      <div class="card-footer form-group">
+        <div class="button-group-container float-right">
+          <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+      </div>
+      <!-- Twilio Ends-->
+    </form>
+  </div>
+
+</div>

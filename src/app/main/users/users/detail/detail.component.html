@@ -1,0 +1,62 @@
+<!-- BEGIN: Sub Header  -->
+<app-sub-header [subHeaderData]="subHeaderData"></app-sub-header>
+<!-- END: Sub Header  -->
+
+<div class="content-wrapper">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card animated fadeIn ">
+                <div class="card-body ">
+                    <div class="container-fluid">
+                        <div class="form-group row">
+                            <div class="col-lg-12">
+                                <div class="profile-info text-center" *ngIf="userDetail">
+                                    <strong>Date :</strong>
+                                    {{userDetail.createdAt? (userDetail.createdAt| date: 'dd-MM-yyyy'):'--'}}
+                                    <span><strong>First Name :</strong></span>
+                                    {{userDetail?.firstname?userDetail.firstname:'--'}}
+                                    <span><strong>Last Name :</strong>
+                                        {{userDetail?.lastname ?userDetail.lastname:'--'}}</span>
+                                    <span><strong>Email :</strong>
+                                        {{userDetail?.emailId ?userDetail?.emailId:'--'}}</span>
+                                    <span><strong>Additinal Email :</strong>
+                                        {{userDetail?.anotherEmailId ?userDetail.anotherEmailId:'--'}}</span>
+                                    <span><strong>Mobile :</strong> {{userDetail?.phone ?userDetail.phone:'--'}}</span>
+                                    <span><strong>Additional Mobile Number :</strong>
+                                        {{userDetail?.anotherPhone ?userDetail.anotherPhone :'--'}}</span>
+                                    <span><strong>Address :</strong>
+                                        <ng-container
+                                            *ngIf="userDetail?.address?.d_no || userDetail?.address?.pincode || userDetail?.address?.street || userDetail?.address?.city || userDetail?.address?.state">
+                                            {{userDetail?.address?.d_no}}, {{userDetail?.address?.pincode}},
+                                            {{userDetail?.address?.street}}, {{userDetail?.address?.city}},
+                                            {{userDetail?.address?.state}}
+                                        </ng-container>
+                                        <ng-container
+                                            *ngIf="!userDetail?.address?.d_no && !userDetail?.address?.pincode && !userDetail?.address?.street && !userDetail?.address?.city && !userDetail?.address?.state">
+                                            --
+                                        </ng-container>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row justify-content-center">
+                            <label class="col-form-label mr-2">Status:</label>
+                            <label class="switch">
+                                <input type="checkbox" class="custom-control-input success" id="customSwitches"
+                                    [(ngModel)]="userDetail.status" (click)="status($event)">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        <div class="row button-group ">
+                            <div class="col-xl-12 col-lg-6 text-center">
+                                <button type="button" class="btn btn-primary"
+                                    [routerLink]="[URLConstants.USERS]">Back</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

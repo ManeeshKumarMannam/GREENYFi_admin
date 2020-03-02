@@ -1,0 +1,90 @@
+<!-- Data Table Start -->
+<div class="table-responsive">
+    <table sortable-table (sorted)="onSorted($event)" class="table custom-table nowrap" *ngIf="tableConfig?.cols">
+      <thead>
+        <tr>
+          <th [sortable-column]="i" *ngFor="let i of tableConfig?.cols" id="table">
+            {{i.colName}}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let i of tableData?.data;let y=index;">
+          <tr class="animated fadeIn">
+            <td *ngFor="let j of tableConfig?.cols; let isFirst = first;">
+              <!-- ACTION COLUMN OF TABLE -  -->
+              <div class="action" *ngIf="j.type=='action'">
+                <div *ngFor=" let k of tableConfig?.actions">
+                  <!-- view action-->
+                  <div class="showInline" *ngIf="k.id === 1">
+                    <span><em class="fa fa-eye cursor" aria-hidden="true" (click)="performAction(k,i)"></em></span>
+                  </div>
+                  <!-- Edit action -->
+                  <div class="showInline" *ngIf="k.id === 2">
+                    <span><em class="fa fa-pencil cursor" aria-hidden="true" (click)="performAction(k,i)"></em></span>
+                  </div>
+                  <!-- delete action -->
+                  <div class="showInline" *ngIf="k.id === 3">
+                    <span><em class="fa fa-trash cursor" aria-hidden="true" (click)="performAction(k,i)"></em></span>
+                  </div>
+
+
+                </div>
+              </div>
+              <!-- ACTION COLUMN OF TABLE --->
+
+              <!-- {{j | json}} -->
+              <!-- SWITCH COLUMN OF TABLE -->
+              <div *ngIf="j.type=='switch'">
+                <span class="switch-checkbox">
+                  <label>
+                    <input type="checkbox" name="draft" (click)='openModel(premiumTemplate,i,rowData)'
+                      [(ngModel)]="i[j.colFieldname]" size="small">
+                    <span></span>
+                  </label>
+                </span>
+              </div>
+              <!-- SWITCH COLUMN OF TABLE -->
+
+
+              <div *ngIf="j.type=='text'">
+                {{j.isDate ? (i[j.colFieldname] | date:'MM dd, yyy') : i[j.colFieldname]}}
+              </div>
+              <ng-template #contentOnly>
+
+              </ng-template>
+            </td>
+            <div class="position-fixed" id="menu_btn">
+              <em class="fa fa-plus-circle" aria-hidden="true"></em>
+            </div>
+          </tr>
+        </ng-container>
+        <tr *ngIf="!tableData.data.length" class="record-not-found">
+          <td colspan="10">No Records found</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+<!-- Pagination start -->
+<div class="card-footer">
+<div class="custom-pagination row" *ngIf="tableData.data.length">
+  <div class="col-md-6">
+    <span class="record-count">Showing</span>
+    <ng-select class="ng-select-line" (change)="rangeChanged(itemsPerPage)" [items]="rangeList" bindLabel="name"
+      bindValue="id" placeholder="Select" [(ngModel)]="itemsPerPage" [clearable]='false' [searchable]='false'
+      [dropdownPosition]="'auto'" [labelForId]="tableData.type">
+    </ng-select>
+    <span class="record-count">out of {{total}} entries</span>
+  </div>
+  <div class="col-md-6">
+    <pagination [rotate]="false" [itemsPerPage]='itemsPerPage' [totalItems]="total" [maxSize]="5"
+      [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)" previousText="Prev" nextText="Next"
+      firstText="&laquo;" lastText="&raquo;">
+    </pagination>
+  </div>
+</div>
+<!-- Pagination end -->
+</div>
+<!-- Data Table End -->

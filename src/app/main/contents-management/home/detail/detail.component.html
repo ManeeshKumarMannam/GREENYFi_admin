@@ -1,0 +1,346 @@
+<!-- BEGIN: Sub Header  -->
+<app-sub-header [subHeaderData]="subHeaderData"></app-sub-header>
+<!-- END: Sub Header  -->
+<div class="content-wrapper">
+  <div class="card animated fadeIn">
+
+    <!-- homeForm Starts -->
+    <form #homeForm="ngForm" (ngSubmit)="submitHomeForm(homeForm, charity)" class=" form-group">
+      <div class="card-body">
+        <div class="row  form-group">
+          <div class="row mx-auto mb-20">
+            <img *ngIf="!images.length" class="user-profile-img" src="assets/images/noImageAvailable.png" alt="no img">
+            <div class="user-profile-img" *ngFor='let image of images; let y=index;'>
+              <i (click)="deleteImage(y)" class="fa fa-times" aria-hidden="true"></i>
+              <img [src]="image ?this.imagePath+image :'assets/images/noImageAvailable.png'" alt="no img">
+            </div>
+            <div>
+              <label>
+                <input class='file-input' style="display: none" type="file" name="photo" accept="image/*" multiple
+                  (change)="fileChangeEvent($event)" id="profile">
+              </label>
+            </div>
+            <a href="javascript:;" (click)="openFile($event,'images')"><em class="fa fa-camera camera"
+                aria-hidden="true"></em></a>
+          </div>
+        </div>
+        <!-- Title starts -->
+        <div class="row form-group">
+          <div class="col-md-3">
+            <label class="col-form-label">Title :</label>
+          </div>
+          <div class="col-md-8" [ngClass]="((submitted || title.touched) && title.invalid)?'has-danger':''">
+            <input type="text" class="form-control" name="title" placeholder="Enter  Title" #title="ngModel"
+              [(ngModel)]="charity.title" required>
+            <div class="error-block text-left" *ngIf="((submitted || title.touched) && title.invalid)">
+              {{showError('title', title.errors)}}
+            </div>
+          </div>
+        </div>
+        <!-- Title Ends -->
+
+        <!-- subTitle Starts -->
+        <div class="row form-group">
+          <div class="col-md-3">
+            <label class="col-form-label">Sub Title :</label>
+          </div>
+          <div class="col-md-8" [ngClass]="((submitted || subTitle.touched) && subTitle.invalid)?'has-danger':''">
+            <input type="text" class="form-control" name="subTitle" placeholder="Enter subTitle " #subTitle="ngModel"
+              [(ngModel)]="charity.subTitle" required>
+            <div class="error-block text-left" *ngIf="((submitted || subTitle.touched) && subTitle.invalid)">
+              {{showError('subTitle', subTitle.errors)}}
+            </div>
+          </div>
+        </div>
+        <!-- subTitle Ends -->
+
+        <!-- Title Description Starts -->
+        <div class="row form-group">
+          <div class="col-md-3">
+            <label class="col-form-label">Title Description :</label>
+          </div>
+          <div class="col-md-8"
+            [ngClass]="((submitted || titleDescription.touched) && titleDescription.invalid)?'has-danger':''">
+            <input type="text" class="form-control" name="titleDescription" placeholder="Enter Title Description "
+              #titleDescription="ngModel" [(ngModel)]="charity.titleDescription" required>
+            <div class="error-block text-left"
+              *ngIf="((submitted || titleDescription.touched) && titleDescription.invalid)">
+              {{showError('titleDescription', titleDescription.errors)}}
+            </div>
+          </div>
+
+        </div>
+        <!-- Title Description Ends -->
+
+        <!-- AboutUs Title Starts -->
+        <div class="row form-group">
+          <div class="col-md-3">
+            <label class="col-form-label">AboutUs Title :</label>
+          </div>
+          <div class="col-md-8"
+            [ngClass]="((submitted || aboutUsTitle.touched) && aboutUsTitle.invalid)?'has-danger':''">
+            <textarea name="aboutUsTitle" class="form-control" placeholder="Enter AboutUs Title" rows="5"
+              #aboutUsTitle="ngModel" [(ngModel)]="charity.aboutUsTitle" maxlength="130" required></textarea>
+            <div class="error-block text-left" *ngIf="((submitted || aboutUsTitle.touched) && aboutUsTitle.invalid)">
+              {{showError('aboutUsTitle', aboutUsTitle.errors)}}
+            </div>
+          </div>
+        </div>
+        <!-- AboutUs Title Ends -->
+
+
+        <div class="row form-group">
+          <div class="col-md-3">
+            <label class="col-form-label">No Of
+              Charities :</label>
+          </div>
+          <div class="col-md-8"
+            [ngClass]="((submitted || numberOfcharities.touched) && numberOfcharities.invalid)?'has-danger':''">
+            <input type="text" class="form-control" name="numberOfcharities" (keydown)="AllowNumbers($event)"
+              placeholder="Enter No Of Charities" #numberOfcharities="ngModel" [(ngModel)]="charity.numberOfcharities"
+              required>
+            <div class="error-block text-left"
+              *ngIf="((submitted || numberOfcharities.touched) && numberOfcharities.invalid)">
+              {{showError('numberOfcharities', numberOfcharities.errors)}}
+            </div>
+          </div>
+        </div>
+        <!-- charitiesDescription -->
+        <div class="row form-group">
+          <div class="col-md-3"
+            [ngClass]="((submitted || charitiesDescription.touched) && charitiesDescription.invalid)?'has-danger':''">
+            <label class="col-form-label">Charities Description :</label>
+          </div>
+          <div class="col-md-8">
+            <input type="text" class="form-control" name="charitiesDescription"
+              placeholder="Enter Charities Description" #charitiesDescription="ngModel"
+              [(ngModel)]="charity.charitiesDescription" required>
+            <div class="error-block text-left"
+              *ngIf="((submitted || charitiesDescription.touched) && charitiesDescription.invalid)">
+              {{showError('charitiesDescription', charitiesDescription.errors)}}
+            </div>
+          </div>
+
+        </div>
+        <!-- numberOfVolunteers -->
+        <div class="row form-group">
+          <div class="col-md-3">
+            <label class="col-form-label">Number Of Volunteers :</label>
+          </div>
+          <div class="col-md-8"
+            [ngClass]="((submitted || numberOfVolunteers.touched) && numberOfVolunteers.invalid)?'has-danger':''">
+            <input type="text" class="form-control" name="numberOfVolunteers" placeholder="Enter Number Of Volunteers"
+              (keydown)="AllowNumbers($event)" #numberOfVolunteers="ngModel" [(ngModel)]="charity.numberOfVolunteers"
+              required>
+            <div class="error-block text-left"
+              *ngIf="((submitted || numberOfVolunteers.touched) && numberOfVolunteers.invalid)">
+              {{showError('numberOfVolunteers', numberOfVolunteers.errors)}}
+            </div>
+          </div>
+        </div>
+        <!-- volunteersDescription -->
+        <div class="row form-group">
+          <div class="col-md-3">
+            <label class="col-form-label">Volunteers Description :</label>
+          </div>
+          <div class="col-md-8"
+            [ngClass]="((submitted || volunteersDescription.touched) && volunteersDescription.invalid)?'has-danger':''">
+            <input type="text" class="form-control" name="volunteersDescription"
+              placeholder="Enter Volunteers Description" #volunteersDescription="ngModel"
+              [(ngModel)]="charity.volunteersDescription" required>
+            <div class="error-block text-left"
+              *ngIf="((submitted || volunteersDescription.touched) && volunteersDescription.invalid)">
+              {{showError('volunteersDescription', volunteersDescription.errors)}}
+            </div>
+          </div>
+        </div>
+        <!-- numberOfDonations -->
+        <div class="row form-group">
+          <div class="col-md-3">
+            <label class="col-form-label">Number-Of-Donations :</label>
+          </div>
+          <div class="col-md-8"
+            [ngClass]="((submitted || numberOfDonations.touched) && numberOfDonations.invalid)?'has-danger':''">
+            <input type="text" class="form-control" (keydown)="AllowNumbers($event)" name="numberOfDonations"
+              placeholder="Enter number Of Donations" #numberOfDonations="ngModel"
+              [(ngModel)]="charity.numberOfDonations" required>
+            <div class="error-block text-left"
+              *ngIf="((submitted || numberOfDonations.touched) && numberOfDonations.invalid)">
+              {{showError('numberOfDonations', numberOfDonations.errors)}}
+            </div>
+          </div>
+        </div>
+        <!-- donationDescription -->
+        <div class="row form-group">
+          <div class="col-md-3">
+            <label class="col-form-label">Donation-Description :</label>
+          </div>
+          <div class="col-md-8"
+            [ngClass]="((submitted || donationDescription.touched) && donationDescription.invalid)?'has-danger':''">
+            <input type="text" class="form-control" name="donationDescription" placeholder="Enter Donation Description "
+              #donationDescription="ngModel" [(ngModel)]="charity.donationDescription" required>
+            <div class="error-block text-left"
+              *ngIf="((submitted || donationDescription.touched) && donationDescription.invalid)">
+              {{showError('donationDescription', donationDescription.errors)}}
+            </div>
+          </div>
+        </div>
+        <!-- donationWaysTitle -->
+        <div class="row form-group">
+          <div class="col-md-3">
+            <label class="col-form-label">Donation-Ways-Title :</label>
+          </div>
+          <div class="col-md-8"
+            [ngClass]="((submitted || donationWaysTitle.touched) && donationWaysTitle.invalid)?'has-danger':''">
+            <input type="text" class="form-control" name="donationWaysTitle" placeholder="Enter donation Ways Title"
+              #donationWaysTitle="ngModel" [(ngModel)]="charity.donationWaysTitle" required>
+            <div class="error-block text-left"
+              *ngIf="((submitted || donationWaysTitle.touched) && donationWaysTitle.invalid)">
+              {{showError('donationWaysTitle', donationWaysTitle.errors)}}
+            </div>
+          </div>
+        </div>
+        <!-- stepsToRegTitle -->
+        <div class="row form-group">
+          <div class="col-md-3">
+            <label class="col-form-label">Steps-To-RegTitle :</label>
+          </div>
+          <div class="col-md-8"
+            [ngClass]="((submitted || stepsToRegTitle.touched) && stepsToRegTitle.invalid)?'has-danger':''">
+            <input type="text" class="form-control" name="stepsToRegTitle" placeholder="Enter steps To RegTitle"
+              #stepsToRegTitle="ngModel" [(ngModel)]="charity.stepsToRegTitle" required>
+            <div class="error-block text-left"
+              *ngIf="((submitted || stepsToRegTitle.touched) && stepsToRegTitle.invalid)">
+              {{showError('stepsToRegTitle', stepsToRegTitle.errors)}}
+            </div>
+          </div>
+        </div>
+        <!-- stepsToRegDescription -->
+        <div class="row form-group">
+          <div class="col-md-3">
+            <label class="col-form-label">Steps-To-RegDescription :</label>
+          </div>
+          <div class="col-md-8"
+            [ngClass]="((submitted || stepsToRegDescription.touched) && stepsToRegDescription.invalid)?'has-danger':''">
+            <input type="text" class="form-control" name="stepsToRegDescription" placeholder="Enter RegDescription"
+              #stepsToRegDescription="ngModel" [(ngModel)]="charity.stepsToRegDescription" required>
+            <div class="error-block text-left"
+              *ngIf="((submitted || stepsToRegDescription.touched) && stepsToRegDescription.invalid)">
+              {{showError('stepsToRegDescription', stepsToRegDescription.errors)}}
+            </div>
+          </div>
+        </div>
+        <!-- donationWayOne -->
+        <div class="row form-group">
+          <div class="col-md-3">
+            <label class="col-form-label">Donation-Way-One :</label>
+          </div>
+          <div class="col-md-8"
+            [ngClass]="((submitted || donationWayOne.touched) && donationWayOne.invalid)?'has-danger':''">
+            <input type="text" class="form-control" name="donationWayOne" placeholder="Enter donation WayOne"
+              #donationWayOne="ngModel" [(ngModel)]="charity.donationWayOne" required>
+            <div class="error-block text-left"
+              *ngIf="((submitted || donationWayOne.touched) && donationWayOne.invalid)">
+              {{showError('donationWayOne', donationWayOne.errors)}}
+            </div>
+          </div>
+        </div>
+        <div class="row form-group">
+          <div class="col-md-3">
+            <label class="col-form-label">Charities Title :</label>
+          </div>
+          <div class="col-md-8"
+            [ngClass]="((submitted || charitiesTitle.touched) && charitiesTitle.invalid)?'has-danger':''">
+            <input type="text" class="form-control" name="charitiesTitle" placeholder="Enter Charity Title"
+              #charitiesTitle="ngModel" [(ngModel)]="charity.charitiesTitle" required>
+            <div class="error-block text-left"
+              *ngIf="((submitted || charitiesTitle.touched) && charitiesTitle.invalid)">
+              {{showError('charitiesTitle', charitiesTitle.errors)}}
+            </div>
+          </div>
+        </div>
+        <div class="row form-group">
+          <div class="col-md-3">
+            <label class="col-form-label">Causes Title :</label>
+          </div>
+          <div class="col-md-8" [ngClass]="((submitted || causesTitle.touched) && causesTitle.invalid)?'has-danger':''">
+            <input type="text" class="form-control" name="causesTitle" placeholder="Enter Causes Title"
+              #causesTitle="ngModel" [(ngModel)]="charity.causesTitle" required>
+            <div class="error-block text-left" *ngIf="((submitted || causesTitle.touched) && causesTitle.invalid)">
+              {{showError('causesTitle', causesTitle.errors)}}
+            </div>
+          </div>
+        </div>
+        <hr />
+      </div>
+      <div class=" form-group">
+        <div class="button-group-container float-right">
+          <button type="button" class="btn btn-primary" (click)="selectTab(1,charity)">Next</button>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <div *ngFor="let i of listArray; index as index">
+          <div class="row  form-group">
+            <div class="user-profile-img">
+              <div>
+                <img [src]="i.icon ?this.imagePath+i.icon :'assets/images/noImageAvailable.png'" alt="no img">
+              </div>
+              <label>
+                <input class='file-input' type="file" name="profile+{{index}}" accept="image/png/svg" multiple
+                  (change)="fileChangeEvent($event, icon)" id="icon">
+              </label>
+              <i *ngIf="i.icon" (click)="deleteImage(index,'icon')" class="fa fa-times" aria-hidden="true"></i>
+              <a href="javascript:;" (click)="openFile($event,'icon',index)"><em class="fa fa-camera camera"
+                  aria-hidden="true"></em></a>
+            </div>
+          </div>
+          <div class="row form-group">
+            <div class="col-md-3">
+              <label class="col-form-label">Title :</label>
+            </div>
+            <div class="col-md-8">
+              <input type="text" class="form-control" name="title{{index}}" placeholder="Enter  Title"
+                #donationTitle="ngModel" [(ngModel)]="i.title" required>
+              <div class="error-block text-left"
+                *ngIf="((submitted || donationTitle.touched) && donationTitle.invalid)">
+                {{showError('donationTitle', donationTitle.errors)}}
+              </div>
+            </div>
+          </div>
+
+          <!-- numberOfDonations -->
+          <div class="row form-group">
+            <div class="col-md-3">
+              <label class="col-form-label">description :</label>
+            </div>
+            <div class="col-md-8">
+              <input type="text" class="form-control" name="description{{index}}"
+                placeholder="Enter number Of Donations" #description="ngModel" [(ngModel)]="i.description" required>
+              <div class="error-block text-left" *ngIf="((submitted || description.touched) && description.invalid)">
+                {{showError('description', description.errors)}}
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <hr />
+
+        <div class=" form-group">
+          <div class="button-group-container float-right">
+            <button type="button" class="btn btn-primary" (click)="selectTab(0,charity)">Back</button>
+          </div>
+        </div>
+        <div class=" form-group">
+          <div class="button-group-container float-right">
+            <button type="submit" class="btn btn-primary">Save</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <button class="btn btn-info" (click)="addForms()">Add More</button>
+      </div>
+    </form>
+    <!-- homeForm Ends -->
+  </div>
+</div>

@@ -1,0 +1,56 @@
+<!-- BEGIN: Sub Header  -->
+<app-sub-header [subHeaderData]="subHeaderData"></app-sub-header>
+<!-- END: Sub Header  -->
+
+<div class="content-wrapper" *ngIf="role">
+    <form #form="ngForm" (ngSubmit)="submitRole(form, role)" autocomplete="off">
+        <div class="card animated fadeIn">
+            <div class="card-header">
+                <h5 class="card-title">Name</h5>
+            </div>
+            <div class="card-body">
+                <form>
+                    <div class="form-group row mb-0">
+                        <label class="col-sm-3 col-form-label">
+                            Role :
+                        </label>
+                        <div class="col-sm-6">
+                            <input class="form-control" type="text" name="role" placeholder="Enter Role" name="role"
+                                [(ngModel)]="role.role" #roleName="ngModel" required />
+                            <div class="error-block text-left"
+                                *ngIf="((submitted || roleName.touched) && roleName.invalid)">
+                                {{showError('roleName', roleName.errors)}}
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6" *ngFor="let i of role.categoryPermissions; let outerindex = index;">
+                <div class="card animated fadeIn mb-3">
+                    <div class="card-header">
+                        <h5 class="card-title"> {{i?.category}}</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-6 checkbox" *ngFor="let j of i.permissions; let index = index">
+                                <label>
+                                    <input type="checkbox" class='form-check-input'
+                                        [name]="'isSelected'+outerindex+index"
+                                        [(ngModel)]="j.isSelected" /><span></span>
+                                    {{j?.permission}}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row pb-3 pl-3">
+            <button type="submit" class="btn btn-primary mr-2">Save</button>
+            <button type="button" class="btn btn-outline-primary"
+                [routerLink]=[URLConstants.MANAGE_ROLES]>Cancel</button>
+        </div>
+    </form>
+</div>
