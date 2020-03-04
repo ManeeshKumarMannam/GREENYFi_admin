@@ -27,13 +27,11 @@ import { ListComponent } from './list/list.component';
       },
       {
         path: 'detail/:id',
-        canActivate: [CanEditManageRoleActivate],
         component: DetailComponent,
         pathMatch: 'full',
       },
       {
         path: 'addNewRole',
-        canActivate: [CanCreateManageRoleActivate],
         component: DetailComponent,
         pathMatch: 'full',
       },

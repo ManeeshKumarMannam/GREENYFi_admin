@@ -57,6 +57,10 @@ import { MyProfileComponent } from './my-profile/my-profile.component';
               loadChildren: 'src/app/main/users/users.module#UsersModule',
             },
             {
+              path: 'reported-issues-list',
+              loadChildren: 'src/app/main/reported-issues/reported-issues.module#ReportedIssuesModule',
+            },
+            {
               path: 'contents-management',
               loadChildren: 'src/app/main/contents-management/contents-management.module#ContentsManagementModule',
             },

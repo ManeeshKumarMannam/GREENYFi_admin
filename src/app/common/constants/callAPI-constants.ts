@@ -111,5 +111,7 @@ export const callAPIConstants = {
     dropDownCausesListing:'MasterManagement/getAllCauses',
     dropDownCharityListing:'MasterManagement/getAllCharities',
     GetCommonContent : 'charityCommonContent',
-    UpdateCommonContent : 'charityCommonContentUpdate'
+    UpdateCommonContent : 'charityCommonContentUpdate',
+    reportedIssuesList : 'issues/allIssuesList',
+    getIssueDetails : 'issues/issueDetails/',
 }

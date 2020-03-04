@@ -1,14 +1,8 @@
 <!-- BEGIN: Sub Header  -->
 <app-sub-header [subHeaderData]="subHeaderData"></app-sub-header>
 <!-- END: Sub Header  -->
-<!-- <div>
-  <img src="assets/images/comingSoon.jpg" alt="no img" width="200px" height="200px">
-</div> -->
+
 <div class="m-content animated fadeIn">
-  <div class="text-right" style="padding: 20px">
-    <button type="button" class="btn btn-primary" [routerLink]="[URLConstants.ADDADMINUSER]">Add Volunteer</button>
-  </div>
-  <!-- [accessPermission]="accessPermission" -->
   <!-- BEGIN: Responsive Data Table  -->
   <app-responsive-data-table [tableSetupData]="tableSetupData" [accessPermission]="accessPermission">
   </app-responsive-data-table>

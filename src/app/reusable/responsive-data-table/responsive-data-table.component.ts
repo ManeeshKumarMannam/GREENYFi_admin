@@ -201,6 +201,10 @@ export class ResponsiveDataTableComponent extends BaseComponent implements OnIni
         this.getMethodName = this.callAPIConstants.transctionList;
         this.CSV = this.callAPIConstants.TransactionsCSVforDataTable;
       }
+      else if (this.type == 'reportedIssuesList') {
+        this.getMethodName = this.callAPIConstants.reportedIssuesList;
+        this.CSV = this.callAPIConstants.TransactionsCSVforDataTable;
+      }
       if (this.getMethodName) {
         this.commonService.callApi(this.getMethodName, this.APIparameters, 'post', false, false).then((success) => {
           if (success.status === 1) {

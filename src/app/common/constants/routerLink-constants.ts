@@ -13,6 +13,7 @@ export const URLConstants = {
     GUESTUSERS_LIST: '/main/users/guest-user/list',
     GUESTUSERS_DETAIL: '/main/users/guest-user/detail',
     ADDADMINUSER: '/main/users/volunteer/AddVolunteer',
+    ISSUESLIST: '/main/reported-issues-list',
     HOME: '/main/contents-management/home/list',
     HOME_DETAIL: '/main/contents-management/home/detail/',
     ADD_NEW_HOME: '/main/contents-management/home/addNewHome',

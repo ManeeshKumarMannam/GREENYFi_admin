@@ -57,9 +57,7 @@ export class DetailComponent extends BaseComponent implements OnInit {
     const title = this.adminUserId ? 'Edit Admin User' : 'Add Admin User';
     this.breadcrumbs = [
       { localeKey: 'home', url: this.URLConstants.DASHBOARD },
-      { localeKey: 'Users', url: this.URLConstants.USERS },
-      { localeKey: 'Admin User List', url: this.URLConstants.ADMINUSER_LIST },
-      { localeKey: title, url: null },
+      { localeKey: 'Volunteer List', url: this.URLConstants.USERS },
     ];
     this.subHeaderData = {
       title,
