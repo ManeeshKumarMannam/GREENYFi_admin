@@ -34,10 +34,10 @@ export class ListComponent extends BaseComponent implements OnInit {
     this.breadcrumbs = [
       { localeKey: 'home', url: this.URLConstants.DASHBOARD },
       { localeKey: 'Users Management', url: this.URLConstants.USERS },
-      { localeKey: 'Admin Users', url: null },
+      { localeKey: 'Volunteers List', url: null },
     ];
     this.subHeaderData = {
-      title: 'Admin Users',
+      title: 'Volunteers',
       breadcrumbs: this.breadcrumbs,
     };
   }
@@ -60,16 +60,15 @@ export class ListComponent extends BaseComponent implements OnInit {
 
   setDTableInitialData() {
     const tempData = [
-      { type: 'multipleSelection', colName: 'Select', colFieldname: '', isVisible: true },
+      { type: 'multipleSelection', colName: 'Select', colFieldname: '', isVisible: false },
       { type: 'image', colName: 'Profile Image', colFieldname: 'photo', columnVisibility: true, isVisible: true },
       { type: 'text', colName: 'First Name', colFieldname: 'firstname', sort: true, columnVisibility: true, filter: true, isVisible: true },
       { type: 'text', colName: 'Last Name', colFieldname: 'lastname', sort: true, columnVisibility: true, filter: true, isVisible: true },
       { type: 'text', colName: 'E-mail', colFieldname: 'emailId', sort: true, columnVisibility: true, filter: true, isVisible: true },
       { type: 'text', colName: 'Phone Number', colFieldname: 'mobile', sort: true, columnVisibility: true, filter: true, isVisible: true },
-      { type: 'adminRole', colName: 'Role', colFieldname: 'role', isVisible: true, sort: true, columnVisibility: true, filter: true, },
       { type: 'symbol', colName: 'Email Verification', colFieldname: 'emailVerificationStatus', columnVisibility: true, isVisible: true },
-      { type: 'switch', colName: 'Status', colFieldname: 'status', columnVisibility: true, filter: true, isVisible: true },
-      { type: 'action', colName: 'Action', colFieldname: '', isVisible: true },
+      { type: 'switch', colName: 'Status', colFieldname: 'status', columnVisibility: true, filter: true, isVisible: false },
+      { type: 'action', colName: 'Action', colFieldname: '', isVisible: false },
     ];
     if (!this.accessPermission.edit) {
       this.hideActionInTable(tempData);
@@ -83,7 +82,7 @@ export class ListComponent extends BaseComponent implements OnInit {
 
     this.tableSetupData.params = { deleteParams: 'userIds', statusParams: 'userIds' };
     this.tableSetupData.conditions = {
-      showTableHeader: true,
+      showTableHeader: false,
       showTableFooter: true,
       showApplyStatus: true,
       showExport: true,

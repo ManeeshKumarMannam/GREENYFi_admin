@@ -65,7 +65,7 @@ export class ResponsiveDataTableComponent extends BaseComponent implements OnIni
     /*************************************************************/
 
     this.statusList = ['Active', 'Inactive'];
-    if (!this.accessPermission.statusUpdate) {
+    if (this.accessPermission && !this.accessPermission.statusUpdate) {
       this.conditions.showApplyStatus = false;
       const index = this.tableConfig.cols.findIndex((o) => o.type === 'multipleSelection');
       if (this.tableConfig.cols[index]) { this.tableConfig.cols[index].isVisible = false; }

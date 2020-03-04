@@ -22,18 +22,11 @@ import { CanAdminUserActivate, CanUserActivate } from '../../common/auth.gaurd';
       },
       {
         path: 'users-list',
-        canActivate: [CanUserActivate],
         loadChildren: 'src/app/main/users/users/users.module#UsersModule',
       },
       {
-        path: 'Admin-User',
-        canActivate: [CanAdminUserActivate],
+        path: 'volunteer',
         loadChildren: 'src/app/main/users/admin-users/admin-users.module#AdminUsersModule',
-      },
-      {
-        path: 'guest-user',
-        canActivate: [CanAdminUserActivate],
-        loadChildren: 'src/app/main/users/guest-users/guest-users.module#GuestUsersModule',
       },
     ]),
   ],

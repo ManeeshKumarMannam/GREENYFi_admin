@@ -14,8 +14,9 @@ export class ListComponent extends BaseComponent implements OnInit {
   constructor(public inj: Injector) {
     super(inj);
     this.accessPermission = this.getRolePermissions("user");
-
-
+    if(!this.accessPermission) {
+      this.accessPermission = {};
+    }
   }
 
   ngOnInit() {
@@ -39,7 +40,7 @@ export class ListComponent extends BaseComponent implements OnInit {
       { localeKey: 'Users', url: null },
     ];
     this.subHeaderData = {
-      title: 'Users',
+      title: 'Registered Users List',
       breadcrumbs: this.breadcrumbs,
     };
   }
@@ -61,16 +62,16 @@ export class ListComponent extends BaseComponent implements OnInit {
 
   setDTableInitialData() {
     const tempData = [
-      { type: 'multipleSelection', colName: 'Select', colFieldname: '', isVisible: true },
-      { type: 'text', colName: 'First Name', colFieldname: 'firstname', sort: true, columnVisibility: true, filter: true, isVisible: true },
-      { type: 'text', colName: 'Last Name', colFieldname: 'lastname', sort: true, columnVisibility: true, filter: true, isVisible: true },
+      // { type: 'multipleSelection', colName: 'Select', colFieldname: '', isVisible: false },
+      // { type: 'text', colName: 'First Name', colFieldname: 'firstname', sort: true, columnVisibility: true, filter: true, isVisible: true },
+      { type: 'text', colName: 'Full Name', colFieldname: 'fullName', sort: true, columnVisibility: true, filter: true, isVisible: true },
       { type: 'text', colName: 'E-mail', colFieldname: 'emailId', sort: true, columnVisibility: true, filter: true, isVisible: true },
-      { type: 'text', colName: 'Phone Number', colFieldname: 'phone', sort: true, columnVisibility: true, filter: true, isVisible: true },
+      { type: 'text', colName: 'Phone Number', colFieldname: 'mobile', sort: true, columnVisibility: true, filter: true, isVisible: true },
       { type: 'symbol', colName: 'Email Verification', colFieldname: 'emailVerificationStatus', columnVisibility: true, isVisible: true },
-      { type: 'switch', colName: 'Status', colFieldname: 'status', columnVisibility: true, filter: true, isVisible: true },
+      { type: 'switch', colName: 'Status', colFieldname: 'status', columnVisibility: true, isVisible: true },
       { type: 'action', colName: 'Action', colFieldname: '', isVisible: true },
     ];
-    if (!this.accessPermission.viewDetails) {
+    if (this.accessPermission && !this.accessPermission.edit) {
       this.hideActionInTable(tempData);
     }
     // if (this.accessPermission && this.accessPermission.viewDetails) {
@@ -80,11 +81,10 @@ export class ListComponent extends BaseComponent implements OnInit {
     this.tableSetupData.type = 'userlist';
     this.tableSetupData.actions = [
       { id: 1, buttonTitle: 'View', class: 'fa fa-eye text-primary', type: 'icon', permission: this.accessPermission.viewDetails },
-
     ];
     this.tableSetupData.params = { deleteParams: 'userIds', statusParams: 'userIds' };
     this.tableSetupData.conditions = {
-      showTableHeader: true,
+      showTableHeader: false,
       showTableFooter: true,
       showApplyStatus: true,
       showExport: true,

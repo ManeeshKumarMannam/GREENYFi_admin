@@ -23,13 +23,11 @@ import { ListComponent } from './list/list.component';
       { path: 'list', component: ListComponent, pathMatch: 'full' },
       {
         path: 'detail/:id',
-        canActivate: [CanEditAdminUserActivate],
         component: DetailComponent,
         pathMatch: 'full',
       },
       {
-        path: 'AddAdminUser',
-        canActivate: [CanCreateAdminUserActivate],
+        path: 'AddVolunteer',
         component: DetailComponent,
         pathMatch: 'full',
       },

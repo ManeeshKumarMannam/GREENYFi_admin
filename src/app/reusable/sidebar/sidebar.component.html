@@ -37,17 +37,17 @@
         <!-- [hidden]="!rolePermission['user-GuestUserAccess'].viewList" -->
         <!-- [hidden]="!rolePermission['user-GuestUserAccess'].viewList" -->
         <li routerLinkActive="sub-nav-active">
-          <a [routerLink]="[URLConstants.USERS]">Register Users</a>
+          <a [routerLink]="[URLConstants.USERS]">Registered Users List</a>
         </li>
-        <li routerLinkActive="sub-nav-active">
+        <!-- <li routerLinkActive="sub-nav-active"> -->
           <!-- [hidden]="!rolePermission['user-GuestUserAccess'].viewList" -->
-          <a [routerLink]=" [URLConstants.GUESTUSERS_LIST]">Guest Users</a>
-        </li>
+          <!-- <a [routerLink]=" [URLConstants.GUESTUSERS_LIST]">Guest Users</a> -->
+        <!-- </li> -->
         <!-- [hidden]="!rolePermission.adminUserAccess.viewList" -->
         <li routerLinkActive="sub-nav-active">
           <!-- *ngIf="accessPermission.adminUserAccess.viewList" -->
           <!-- <a [routerLink]="[URLConstants.ADMINUSER_LIST]">Admin Users</a> -->
-          <a [routerLink]="[URLConstants.ADMINUSER_LIST]">Admin Users</a>
+          <a [routerLink]="[URLConstants.ADMINUSER_LIST]">Volunteers  List</a>
         </li>
       </ul>
     </li>

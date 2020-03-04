@@ -281,8 +281,6 @@ export class BaseComponent {
     let role;
     if (this.getToken('role_permission')) {
       role = this.commonService.decrypt(this.getToken('role_permission'));
-
-
       let roleKey: any;
       switch (key) {
         case 'user': roleKey = role['user-GuestUserAccess'];

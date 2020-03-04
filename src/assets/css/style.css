@@ -6,13 +6,13 @@
 ul,li, ol { margin: 0; padding: 0; list-style-type: none }
 button:focus{outline:none;}
 .btn{ line-height: 16px; font-size: 12px; border:none; box-shadow: none;font-weight:600; border-radius:0px;}
-.btn-primary{ background-color: #4184ef;border-color: #4184ef;min-width:75px;}
+.btn-primary{ background-color: #2b9777;border-color: #2b9777;min-width:75px;}
 .btn-gray {background-color: #2b9777;border-color: #2b9777;min-width:75px;}
 button.btn.btn-outline-primary:hover,body .swal2-popup .swal2-styled.swal2-cancel:hover.btn-primary:hover,.btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle,.btn-primary:not(:disabled):not(.disabled).active:focus, .btn-primary:not(:disabled):not(.disabled):active:focus, .show>.btn-primary.dropdown-toggle:focus,body .swal2-popup .swal2-styled.swal2-confirm{background:#0050e3;box-shadow: none;}
 .btn-teal {color: #fff;background-color: #00c292;border-color: #00c292;}
-button.btn.btn-outline-primary,body .swal2-popup .swal2-styled.swal2-cancel {background:none;border:1px solid #4184ef;color:#4184ef;min-width:70px;}
- button.btn.btn-outline-primary:active, button.btn.btn-outline-primary:focus{color:#4184ef;}
- body .swal2-popup .swal2-styled.swal2-cancel:hover{ background-color: #4184ef;color:#fff;}
+button.btn.btn-outline-primary,body .swal2-popup .swal2-styled.swal2-cancel {background:none;border:1px solid #2b9777;color:#2b9777;min-width:70px;}
+ button.btn.btn-outline-primary:active, button.btn.btn-outline-primary:focus{color:#2b9777;}
+ body .swal2-popup .swal2-styled.swal2-cancel:hover{ background-color: #2b9777;color:#fff;}
 .btn-secondary{ background:#8B8B8B;}
 .btn-secondary:hover,.btn-secondary:not(:disabled):not(.disabled).active, .btn-secondary:not(:disabled):not(.disabled):active, .show>.btn-secondary.dropdown-toggle,.btn-secondary:not(:disabled):not(.disabled).active:focus, .btn-secondary:not(:disabled):not(.disabled):active:focus, .show>.btn-secondary.dropdown-toggle:focus{background:#797878;box-shadow: none;}
 .link{color:#3d3d3d; position: relative;}
@@ -2384,7 +2384,7 @@ display: block;
 
 .deletefilter
 {
-  background-color:#4184ef;
+  background-color:#2b9777;
   color:white;
   padding-left:7px;
   padding-right:10px;

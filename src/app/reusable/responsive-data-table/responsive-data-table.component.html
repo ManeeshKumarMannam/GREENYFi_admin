@@ -200,7 +200,7 @@
               <ng-container *ngIf="i.type!=='multipleSelection' && i.type!=='switch'">
                 {{i.colName}}
               </ng-container>
-              <ng-container *ngIf="i.type=='switch'&& accessPermission.statusUpdate">{{i.colName}}</ng-container>
+              <ng-container *ngIf="i.type=='switch'">{{i.colName}}</ng-container>
               <div *ngIf="i.type=='multipleSelection'" class="checkbox">
                 <label>
                   <input type="checkbox" name="checkbox" [(ngModel)]="i.checkbox"
@@ -220,7 +220,7 @@
                   <label><input type="checkbox" name="checkbox" [(ngModel)]="i.checkbox"
                       (change)="selectMultipleUser(i,y)"><span></span></label>
                 </div>
-                <div *ngIf="j.type=='switch' && accessPermission.statusUpdate">
+                <div *ngIf="j.type=='switch'">
                   <label class="switch">
                     <input type="checkbox" class="success" [(ngModel)]="i[j.colFieldname]" (click)="changeStatus(i)">
                     <span class="slider round"></span>
