@@ -66,8 +66,6 @@ export class CommonService {
       headers = new HttpHeaders({ 'content-Type': 'application/json', 'Authorization': this.getToken('accessToken') });
     }
     if (isForm) {
-
-
       headers = new HttpHeaders({ Authorization: this.getToken('accessToken') });
     }
     return new Promise((resolve, reject) => {

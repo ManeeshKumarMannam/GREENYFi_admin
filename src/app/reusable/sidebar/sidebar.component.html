@@ -152,7 +152,7 @@
     </li>
 
     <!-- Settings -->
-    <li class="nav-item parent">
+    <li class="nav-item parent" *ngIf="false">
       <a class="nav-link" href="javascript:;" [hidden]="getToken('role') !== 'Super Admin'">
         <span class=" nav-link-icon fa fa-cog" aria-hidden="true"></span>
         <span class="nav-link-text">Settings</span>
