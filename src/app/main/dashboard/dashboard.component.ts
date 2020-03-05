@@ -37,11 +37,19 @@ export class DashboardComponent extends BaseComponent implements OnInit {
   /*************************************************************/
 
   dashBoardData() {
-    this.commonService.callApi('MasterManagement/dashboard', '', 'get', false, false, false).then((success) => {
-      this.dashBoardDetails = success;
-      let x = this.dashBoardDetails.totalAmountforRegistredUsers.replace(/,/gi, '');
-      let y = this.dashBoardDetails.totalAmountforGuestUsers.replace(/,/gi, '');
-      this.dashBoardDetails.totalAmount = Number(x) + Number(y)
-    })
+    this.dashBoardDetails.usersCount = 32;
+    this.dashBoardDetails.volunteersCount = 15;
+    this.dashBoardDetails.totalAmount = 'XXXX';
+    this.dashBoardDetails.totalAmountforPlanting = 'XXXX';
+    this.dashBoardDetails.totalAmountforGuestUsers = 'XXXX';
+    this.dashBoardDetails.issuesCount = 213;
+    this.dashBoardDetails.registeredEventsCount = 23;
+
+    // this.commonService.callApi('MasterManagement/dashboard', '', 'get', false, false, false).then((success) => {
+    //   this.dashBoardDetails = success;
+    //   let x = this.dashBoardDetails.totalAmountforRegistredUsers.replace(/,/gi, '');
+    //   let y = this.dashBoardDetails.totalAmountforGuestUsers.replace(/,/gi, '');
+    //   this.dashBoardDetails.totalAmount = Number(x) + Number(y)
+    // })
   }
 }

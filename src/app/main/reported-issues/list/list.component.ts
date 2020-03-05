@@ -63,10 +63,10 @@ export class ListComponent extends BaseComponent implements OnInit {
     const tempData = [
       // { type: 'multipleSelection', colName: 'Select', colFieldname: '', isVisible: false },
       // { type: 'text', colName: 'First Name', colFieldname: 'firstname', sort: true, columnVisibility: true, filter: true, isVisible: true },
-      { type: 'text', colName: 'Full Name', colFieldname: 'fullName', sort: true, columnVisibility: true, filter: true, isVisible: true },
-      { type: 'text', colName: 'E-mail', colFieldname: 'emailId', sort: true, columnVisibility: true, filter: true, isVisible: true },
-      { type: 'text', colName: 'Phone Number', colFieldname: 'mobile', sort: true, columnVisibility: true, filter: true, isVisible: true },
-      { type: 'symbol', colName: 'Email Verification', colFieldname: 'emailVerificationStatus', columnVisibility: true, isVisible: true },
+      { type: 'image', colName: 'Images', colFieldname: 'images', sort: false, columnVisibility: true, filter: true, isVisible: true },
+      { type: 'text', colName: 'City', colFieldname: 'city', sort: false, columnVisibility: true, filter: true, isVisible: true },
+      { type: 'text', colName: 'Area', colFieldname: 'area', sort: false, columnVisibility: true, filter: true, isVisible: true },
+      { type: 'text', colName: 'Location', colFieldname: 'location', sort: false, columnVisibility: true, filter: true, isVisible: true },
       { type: 'switch', colName: 'Status', colFieldname: 'status', columnVisibility: true, isVisible: true },
       { type: 'action', colName: 'Action', colFieldname: '', isVisible: true },
     ];
@@ -80,6 +80,7 @@ export class ListComponent extends BaseComponent implements OnInit {
     this.tableSetupData.type = 'reportedIssuesList';
     this.tableSetupData.actions = [
       { id: 1, buttonTitle: 'View', class: 'fa fa-eye text-primary', type: 'icon', permission: this.accessPermission.viewDetails },
+      { id : 2, buttonTitle : "Assign Volunteer", class: 'btn btn-primary', type :'button'}
     ];
     this.tableSetupData.params = { deleteParams: 'userIds', statusParams: 'userIds' };
     this.tableSetupData.conditions = {

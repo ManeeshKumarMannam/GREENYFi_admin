@@ -229,7 +229,7 @@
                 <div *ngIf="j.type=='image'" class="thumb-img">
                   <span>
                     <img
-                      [src]="i[j.colFieldname] ? this.imagePath + i[j.colFieldname] : 'assets/images/noImageAvailable.png'"
+                      [src]="i[j.colFieldname] ? i[j.colFieldname][0] : 'assets/images/noImageAvailable.png'"
                       alt="no img" width="50px">
                   </span>
                 </div>
