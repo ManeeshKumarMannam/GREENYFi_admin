@@ -43,7 +43,7 @@
     "grapesjs-preset-webpage": "0.1.11",
     "gulp": "4.0.2",
     "gulp-imagemin": "5.0.3",
-    "jquery": "3.4.1",
+    "jquery": "3.5.0",
     "line-awesome": "1.0.2",
     "moment": "^2.24.0",
     "ngx-bootstrap": "4.3.0",
